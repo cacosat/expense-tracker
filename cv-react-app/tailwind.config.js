@@ -2,8 +2,14 @@
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bgColor: "#000000"
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    "prettier-plugin-tailwindcss"
+  ],
 }
 
