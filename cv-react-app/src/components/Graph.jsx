@@ -60,7 +60,7 @@ export default function Graph(props) {
             position: "top", 
             textStyle: {color: '#FFFFFF'} 
         },
-        colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+        colors: ['#D32F2F', '#1976D2', '#388E3C', '#FBC02D', '#7B1FA2'],
     };
 
     function adjustChartHeight(chartWidth) {

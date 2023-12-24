@@ -3,6 +3,7 @@ import ExpenseCard from './components/ExpenseCard'
 import Header from './components/Header'
 import AddExpenseCard from './components/AddExpenseCard'
 import Graph from './components/Graph'
+import History from './components/History'
 import './App.css'
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
 
     <div className='flex justify-center'>
       <Graph width={gridWidth} />
+    </div>
+    <div className='flex justify-center'>
+      <History width={gridWidth} />
     </div>
   </div>
   </>
