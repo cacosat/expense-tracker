@@ -82,7 +82,7 @@ router.get('/expenses', (req, res) => {
 
     // filtering expenses if category is provided
     if (req.query.category_id) {
-        getExpensesQuery += 'WHERE category_id = ?';
+        getExpensesQuery += ' WHERE category_id = ?';
         params.push(req.query.category_id);
     }
 
