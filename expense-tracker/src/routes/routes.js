@@ -1,5 +1,5 @@
 import express from 'express';
-import db from '../db/db';
+import db from '../db/db.js';
 
 // New instance of router object, later used to define routes
 const router = express.Router();
@@ -93,3 +93,5 @@ router.get('/expenses', (req, res) => {
         res.json(expenses);
     });
 });
+
+export default router;
