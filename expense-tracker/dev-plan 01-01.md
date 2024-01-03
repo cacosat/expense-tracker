@@ -20,26 +20,26 @@ So far, we have accomplished the following:
 
 ### Next Steps (To-Do Format):
 
-1. **Total Expenses Counter**:
+1. **(DONE) Total Expenses Counter**: 
    - Can be in addition to the endpoint of get expenses or an entirely different endpoint.git 
    - Implement a query within the GET /expenses endpoint to calculate the sum of all expenses.
    - Example: `SELECT SUM(amount) FROM expenses;`
    - Update the endpoint to return this total along with the list of expenses.
 
-2. **Refine Business Logic**:
+2. **(DONE) Refine Business Logic**:
    - Add input validation in route handlers to check for non-empty and valid data.
    - Example: Use middleware or a utility function to validate the request body.
 
-3. **Data Manipulation and Reporting**:
+3. **(MOVED TO FRONTEND INTEGRATION) Data Manipulation and Reporting**: 
    - Modify the GET /expenses endpoint to aggregate expenses by category.
    - Example: `SELECT category_id, SUM(amount) FROM expenses GROUP BY category_id;`
    - Return this data for frontend graph processing.
 
-4. **Security Measures**:
+4. **(MOVED TO PRE DEPLOYMENT) Security Measures**:
    - Ensure that all user inputs are validated and sanitized in the route handlers.
    - Example: Use a library like `express-validator` to check and clean data.
 
-5. **Testing**:
+5. **(DONE) Testing**:
    - Manually test all endpoints using tools like Postman or Insomnia.
    - Example: Create various requests in Postman to test each endpoint for different scenarios.
 
