@@ -65,6 +65,7 @@ router.post('/expenses', (req, res) => {
 
     const postExpensesQuery = 'INSERT INTO expenses (category_id, description, expense_date, amount) VALUES (?, ?, ?, ?)';
 
+    // Database.run() when no value is expected
     db.run(postExpensesQuery, [category_id, description, expense_date, amount], function(error) {
         if (error) {
             return res.status(500).json({error: error.message});
@@ -93,5 +94,29 @@ router.get('/expenses', (req, res) => {
         res.json(expenses);
     });
 });
+
+// Endpoint 5: Total sum of expenses /GET expenses-total
+
+router.get('/expenses-total', (req, res) => {
+    // SQL query to sum all the column amount (treated as 'total') from expenses
+    let getExpensesTotalQuery = 'SELECT SUM(amount) as total FROM expenses';
+    let params = [];
+
+    // filter by category
+    if(req.query.category_id) {
+        getExpensesTotalQuery += ' WHERE category_id = ?'; // ? is a placeholder, later specified by params in db.get()
+        params.push(req.query.category_id);
+    }
+
+    // Database.get() used for when one value is expected, returns single value instead of array (.all())
+    db.get(getExpensesTotalQuery, params, function(error, row) {
+        if (error) {
+            return res.status(500).json({error: error.message});
+        }
+        res.json({total: row.total});
+    });
+});
+
+// Export
 
 export default router;
