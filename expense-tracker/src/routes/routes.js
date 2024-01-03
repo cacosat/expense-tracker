@@ -97,7 +97,7 @@ router.get('/expenses', (req, res) => {
 
 // Endpoint 5: Total sum of expenses /GET expenses-total
 
-router.get('/expenses-total', (req, res) => {
+router.get('/expenses/total', (req, res) => {
     // SQL query to sum all the column amount (treated as 'total') from expenses
     let getExpensesTotalQuery = 'SELECT SUM(amount) as total FROM expenses';
     let params = [];
