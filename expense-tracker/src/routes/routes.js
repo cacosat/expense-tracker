@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/categories', (req, res) => { // New route for HTTP POST on the path /categories
     const {name} = req.body; // getting category's 'name' property expected from the request
-    if (!name) {
+    if (!name || !/^[a-zA-Z\s]{3,50}$/.test(name)) { // regex to limit to any char (and space) between 3 - 50, against which name is tested
         // best practice error handling for when the request doesn't contain name, sent as JSON object w/error messg
         return res.status(400).json({error: 'Nombre de categoría es requerido'}) // Bad request status code 400
     }
@@ -59,8 +59,8 @@ router.get('/categories', (req, res) => {
 router.post('/expenses', (req, res) => {
     const {category_id, description, expense_date, amount} = req.body;
 
-    if (!category_id || !description || !expense_date || !amount) {
-        return res.status(400).json({error:'All fields required'})
+    if (!category_id || !description || !/^[a-zA-Z0-9\s.,'-]{1,500}$/.test(description) || !expense_date || !amount || amount <= 0) {
+        return res.status(400).json({error:'All fields required and/or invalid entry'})
     }
 
     const postExpensesQuery = 'INSERT INTO expenses (category_id, description, expense_date, amount) VALUES (?, ?, ?, ?)';
@@ -116,6 +116,7 @@ router.get('/expenses/total', (req, res) => {
         res.json({total: row.total});
     });
 });
+
 
 // Export
 
