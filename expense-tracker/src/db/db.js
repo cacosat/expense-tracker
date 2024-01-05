@@ -27,11 +27,13 @@ const createExpensesTable = `
 CREATE TABLE IF NOT EXISTS expenses(
     id INTEGER PRIMARY KEY,
     category_id INTEGER, 
+    category_name TEXT,
     description TEXT, 
     expense_date TEXT NOT NULL,
     amount REAL NOT NULL, 
     date_created TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id),
+    FOREIGN KEY (category_name) REFERENCES categories(name)
 );
 `;
 
