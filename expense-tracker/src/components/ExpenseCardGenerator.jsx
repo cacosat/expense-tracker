@@ -51,39 +51,50 @@ function ExpenseCardGenerator(props) {
         }
       });
 
-      return result;
+      return [result, categories]; // result of type {category_name: [{expense1}, {expense 2}, {expenseN}],}
     }
+
+    let [expensesByCat, categories] = expensesByCategory(useExpenses);
   
     return <>
-    {useExpenses.map((expense, index) => {
-      let expensesByCat = expensesByCategory(useExpenses);
+    {categories.map((category, index) => {
 
-      return <>
-      <div key={index} className="flex flex-col gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
+      return <React.Fragment key={index}>
+      <div className="flex flex-col gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
         {/* Contenedor card */}
         <div className="text-lg max-sm:text-base font-bold self-end">
           {/* Ej.: Alojamiento */}
           {/* {expense.category_name}  */}
+          {category}
         </div>
         <div className="flex flex-col gap-4">
         {/* contenedor precio + historial */}
           <div className="flex self-end text-3xl max-sm:text-2xl font-bold">
               {/* Ej.: $100000 */}
-              {/* {expense.amount}  */}
+              {/* Last amount registered for each category */}
+              {expensesByCat[category][expensesByCat[category].length-1].amount}              
           </div>
           <div className="flex justify-between text-sm text-stone-500 max-sm:hidden">
               <div>
                 {/* Ej.: 25 de dic. */}
                 {/* {categoryExpenses.length <= 1 || index === 0 ? '-': categoryExpenses[categoryExpenses.length-1].expense_date}  */}
+                {/* {expensesByCat[expense.category_name].length <= 1 || index === 0 ? ('-'
+                ) : (
+                  'o')} */}
+                {expensesByCat[category].length <= 1 ? '-' : expensesByCat[category][expensesByCat[category].length-2].expense_date}
               </div>
               <div>
                 {/* Ej.: $9000 */}
                 {/* {categoryExpenses.length <= 1 || index === 0 ? '-' : categoryExpenses[categoryExpenses.length-1].amount}  */}
+                {/* {expensesByCat[expense.category_name].length <= 1 || index === 0 ? ('-'
+                ) : (
+                  expensesByCat[expense.category_name][1].amount)} */}
+                {expensesByCat[category].length <= 1 ? '-' : expensesByCat[category][expensesByCat[category].length-2].amount}
               </div>
           </div>
         </div>
       </div>
-      </>
+      </React.Fragment>
     })}
     </>
 }
