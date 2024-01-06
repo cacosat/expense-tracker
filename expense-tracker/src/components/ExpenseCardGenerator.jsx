@@ -2,14 +2,9 @@ import React, { useEffect, useState } from "react";
 
 function ExpenseCardGenerator(props) {
     // useState
-    const[useExpenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), useExpenses is array of objects
-    
-    // functions
-    const extractObjectByAttribute = (array, attribute) => {
-      let filteredArray = array.filter((obj) => obj.category_id === attribute);
-      return filteredArray;
-    }
-  
+    const [useExpenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), useExpenses is array of objects
+    // const [useCategories, setCategories]= useState([]); // useState to keep track of categories available
+
     // useEffect
     useEffect(() => { // useEffect let's you handle connection from component to external system
       async function fetchExpenses() {
@@ -23,29 +18,67 @@ function ExpenseCardGenerator(props) {
       }
       fetchExpenses();
     }, []);
-  
+
+    // useEffect(() => {
+    //   async function fetchCategories() {
+    //     try {
+    //       const response = await fetch('http://localhost:4000/api/categories');
+    //       const categories = await response.json();
+    //       setCategories(categories);
+    //     } catch (error) {
+    //       console.error({'failed categories fetch': error});
+    //     }
+    //   }
+    //   fetchCategories();
+    // }, []);  
     
+    // functions
+    const expensesByCategory = (expenses) => {
+      // TODO: reduce to single for loop
+      let result = {};
+
+      let categories = []; // contains all category names
+      expenses.forEach((expense) => {
+        if (!categories.includes(expense.category_name)) {
+          categories.push(expense.category_name);
+          result[expense.category_name] = []; // adding {category_name : []} to result
+        }
+      });
+
+      expenses.forEach((expense) => {
+        if (categories.includes(expense.category_name)) {
+          result[expense.category_name].push(expense);
+        }
+      });
+
+      return result;
+    }
+  
     return <>
     {useExpenses.map((expense, index) => {
-      let categoryExpenses = extractObjectByAttribute(useExpenses, expense.category_id);
+      let expensesByCat = expensesByCategory(useExpenses);
 
       return <>
       <div key={index} className="flex flex-col gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
         {/* Contenedor card */}
         <div className="text-lg max-sm:text-base font-bold self-end">
-          {expense.category_name} {/* Ej.: Alojamiento */}
+          {/* Ej.: Alojamiento */}
+          {/* {expense.category_name}  */}
         </div>
         <div className="flex flex-col gap-4">
         {/* contenedor precio + historial */}
           <div className="flex self-end text-3xl max-sm:text-2xl font-bold">
-              {expense.amount} {/* Ej.: $100000 */}
+              {/* Ej.: $100000 */}
+              {/* {expense.amount}  */}
           </div>
           <div className="flex justify-between text-sm text-stone-500 max-sm:hidden">
               <div>
-                {categoryExpenses.length <= 1 || index === 0 ? '-': categoryExpenses[categoryExpenses.length-1].expense_date} {/* Ej.: 25 de dic. */}
+                {/* Ej.: 25 de dic. */}
+                {/* {categoryExpenses.length <= 1 || index === 0 ? '-': categoryExpenses[categoryExpenses.length-1].expense_date}  */}
               </div>
               <div>
-                {categoryExpenses.length <= 1 || index === 0 ? '-' : categoryExpenses[categoryExpenses.length-1].amount} {/* Ej.: $9000 */}
+                {/* Ej.: $9000 */}
+                {/* {categoryExpenses.length <= 1 || index === 0 ? '-' : categoryExpenses[categoryExpenses.length-1].amount}  */}
               </div>
           </div>
         </div>
