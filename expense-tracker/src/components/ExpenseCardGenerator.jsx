@@ -25,7 +25,7 @@ function ExpenseCardGenerator(props) {
     }, []);
   
     
-    return <>git 
+    return <>
     {useExpenses.map((expense, index) => {
       let categoryExpenses = extractObjectByAttribute(useExpenses, expense.category_id);
 
