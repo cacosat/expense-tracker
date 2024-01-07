@@ -1,8 +1,23 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import PlusIcon from "../assets/plus-circle.svg"
 
 export default function Header(props) {
-    // hooks
+    // useState to keep track of total
+    let [useTotal, setTotal] = useState(0);
+
+    // useEffect for data fetching
+    useEffect(() => {
+        async function fetchTotal() {
+            try {
+                const response = await fetch('http://localhost:4000/api/expenses/total');
+                const total = await response.json();
+                setTotal(total);
+            } catch (error) {
+                console.error({'Failed fetchTotal': error});
+            }
+        }
+        fetchTotal();
+    }, []);
 
     return <>
     <div className="flex justify-center">
@@ -13,7 +28,7 @@ export default function Header(props) {
                     Total
                 </h3>
                 <h1 className="text-4xl font-bold">
-                    {props.totalExpense}
+                    {useTotal.total}
                 </h1>
             </div>
             <div>

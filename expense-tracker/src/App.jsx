@@ -27,13 +27,7 @@ function App() {
     
     <div className='flex justify-center'>
       <div ref={gridContainerRef} className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-        {/* Values [category, expense, date, dateExpenses] should be dynamic */}
         <ExpenseCardGenerator />
-        {/* <ExpenseCard category="Alojamiento" expense="$1689900" date="20 de dic." dateExpense="$89000"/>
-        <ExpenseCard category="Comida" expense="$10000" date="25 de dic." dateExpense="$9000"/>
-        <ExpenseCard category="Movilización" expense="$105620" date="28 de dic." dateExpense="$81025"/>
-        <ExpenseCard category="Entretención" expense="$262500" date="31 de dic." dateExpense="$65000"/>
-        <ExpenseCard category="Otros" expense="$89000" date="02 de ene." dateExpense="$9000"/> */}
         <AddExpenseCard />
       </div>
     </div>
