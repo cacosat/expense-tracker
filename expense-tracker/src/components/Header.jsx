@@ -20,8 +20,8 @@ export default function Header(props) {
     }, []);
 
     return <>
-    <div className="flex justify-center">
-        <div className="flex justify-between items-center mt-8" style={{width: `${props.width}px`}}>
+    <div className={`flex justify-between`}>
+        <div className={`flex w-[${props.width}] justify-between items-center mt-8`}>
             <div className="flex flex-col items-start gap-4">
                 {/* text */}
                 <h3 className="text-2xl">

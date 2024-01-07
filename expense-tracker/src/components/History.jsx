@@ -47,7 +47,7 @@ export default function History(props) {
     // {"id":10,"category_id":5,"category_name":"Other","description":"Miscellaneous","expense_date":"2021-09-15","amount":156,"date_created":"2024-01-06 23:32:16"}
   
     return <>
-    <div style={{width: `${props.width}px`}} className="flex flex-col gap-8 mb-8 ">
+    <div className={`flex flex-col gap-8 mb-8 w-[${props.width}]`}>
       <div className='text-2xl text-start'>
         Historial
       </div>

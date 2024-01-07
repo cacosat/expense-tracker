@@ -63,26 +63,16 @@ export default function Graph(props) {
         colors: ['#D32F2F', '#1976D2', '#388E3C', '#FBC02D', '#7B1FA2'],
     };
 
-    function adjustChartHeight(chartWidth) {
-        if (chartWidth <= 400) {
-            return "200px"
-        } else if (chartWidth <= 650) {
-            return "250px"
-        } else {
-            return "400px"
-        }
-    }
-
     return <>
-    <div style={{width: `${props.width}px`}} className="flex flex-col gap-8">
+    <div  className="flex flex-col gap-8">
       <div className='text-2xl text-start'>
         Gráfico de Gastos
       </div>
-      <div className="flex flex-col justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden">
+      <div className={`flex flex-col w-[${props.width}] justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden`}>
         <Chart
             chartType="LineChart"
             width="100%"
-            height={adjustChartHeight(props.width)}
+            height= "350px"
             data={data}
             options={options}
         />
