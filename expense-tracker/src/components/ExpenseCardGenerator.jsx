@@ -72,6 +72,7 @@ function ExpenseCardGenerator(props) {
           <div className="flex self-end text-3xl max-sm:text-2xl font-bold">
               {/* Ej.: $100000 */}
               {/* Last amount registered for each category */}
+              {/* TODO could modify to show category total */}
               {expensesByCat[category][expensesByCat[category].length-1].amount}              
           </div>
           <div className="flex justify-between text-sm text-stone-500 max-sm:hidden">
