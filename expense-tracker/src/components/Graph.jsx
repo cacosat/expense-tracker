@@ -71,7 +71,7 @@ export default function Graph(props) {
       <div className={`flex flex-col w-[${props.width}] justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden`}>
         <Chart
             chartType="LineChart"
-            width="100%"
+            width={props.width}
             height= "350px"
             data={data}
             options={options}

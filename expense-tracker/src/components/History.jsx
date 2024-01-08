@@ -93,7 +93,7 @@ export default function History(props) {
                   <td className="p-2 ">{expense.expense_date}</td>
                   <td className="p-2 ">{expense.amount}</td>
                   <td className="p-2 ">{expense.category_name}</td>
-                  <td className="p-2 hidden lg:table-cell max-w-[250px]">{expense.description}</td>
+                  <td className="p-2 hidden sm:table-cell max-w-[250px]">{expense.description}</td>
                 </tr>
               ))}
             </tbody>
