@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS categories(
 `;
 const createExpensesTable = `
 CREATE TABLE IF NOT EXISTS expenses(
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     category_id INTEGER, 
     category_name TEXT,
     description TEXT, 

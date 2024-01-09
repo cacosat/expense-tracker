@@ -5,6 +5,7 @@ import AddExpenseCard from './components/AddExpenseCard'
 import Graph from './components/Graph'
 import History from './components/History'
 import ExpenseCardGenerator from './components/ExpenseCardGenerator'
+import AddExpenseModal from './components/AddExpenseModal'
 import './App.css'
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
         <History width={appWidth} />
       </div>
     </div>
+    <AddExpenseModal width={appWidth} />
   </div>
   </>
 };

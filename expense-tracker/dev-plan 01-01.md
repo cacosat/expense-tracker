@@ -20,7 +20,7 @@ So far, we have accomplished the following:
 
 ### Next Steps (To-Do Format):
 
-1. **(DONE) Total Expenses Counter**: 
+1. **(DONE VIA ADDITIONAL ENDPOINT) Total Expenses Counter**: 
    - Can be in addition to the endpoint of get expenses or an entirely different endpoint.git 
    - Implement a query within the GET /expenses endpoint to calculate the sum of all expenses.
    - Example: `SELECT SUM(amount) FROM expenses;`
@@ -30,7 +30,7 @@ So far, we have accomplished the following:
    - Add input validation in route handlers to check for non-empty and valid data.
    - Example: Use middleware or a utility function to validate the request body.
 
-3. **(MOVED TO FRONTEND INTEGRATION) Data Manipulation and Reporting**: 
+3. **(DONE VIA ANOTHER ENDPOINT) Data Manipulation and Reporting**: 
    - Modify the GET /expenses endpoint to aggregate expenses by category.
    - Example: `SELECT category_id, SUM(amount) FROM expenses GROUP BY category_id;`
    - Return this data for frontend graph processing.
@@ -47,15 +47,19 @@ So far, we have accomplished the following:
    - Connect the frontend with the backend API endpoints.
    - Example: Use `fetch` or `axios` in your React components to send requests to the backend.
 
-7. **Deployment Preparation**:
+7. **UI Components**
+   - Build pop up to add expenses.
+   - Add delete icon within categories and expenses.
+
+8. **Deployment Preparation**:
    - Choose a cloud service for deployment (e.g., Heroku, AWS).
    - Set up a production-ready database.
    - Configure environment variables for the production environment.
 
-8. **Deployment**:
+9.  **Deployment**:
    - Deploy the application to the chosen cloud service.
    - Perform final testing in the production environment.
 
-9. **Continuous Monitoring and Improvement**:
+10. **Continuous Monitoring and Improvement**:
    - Monitor the deployed application for any issues or user feedback.
    - Regularly update and improve the application based on this feedback.
