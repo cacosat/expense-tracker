@@ -25,29 +25,9 @@ export default function History(props) {
       fetchExpenses();
     }, []);
 
-    // const expenses = [
-    //   { id: 0, date: '20/12/2023', category: 'Comida', description: 'Descripción del gasto de la comida', amount: '$9000' },
-    //   { id: 1, date: '23/12/2023', category: 'Alojamiento', description: 'Descripción del gasto de alojamiento', amount: '$90500' },
-    //   { id: 2, date: '26/12/2023', category: 'Movilización', description: 'Descripción del gasto de movilización', amount: '$5300' },
-    //   { id: 3, date: '27/12/2023', category: 'Comida', description: 'Descripción del gasto de comida', amount: '$11500' },
-    //   { id: 4, date: '29/12/2023', category: 'Comida', description: 'Descripción del gasto de comida', amount: '$20500' },
-    //   { id: 5, date: '31/12/2023', category: 'Alojamiento', description: 'Descripción del gasto de alojamiento', amount: '$156500' },
-    //   { id: 6, date: '01/01/2023', category: 'Otros', description: 'Descripción del gasto de otro tipo', amount: '$86500' },
-    // ];
-
-    // {"id":1,"category_id":1,"category_name":"Groceries","description":"Bought vegetables","expense_date":"2021-09-05","amount":45,"date_created":"2024-01-05 02:06:46"}
-    // {"id":2,"category_id":2,"category_name":"Transportation","description":"Monthly bus pass","expense_date":"2021-09-06","amount":60,"date_created":"2024-01-05 02:07:08"}
-    // {"id":3,"category_id":3,"category_name":"Utilities","description":"Electricity bill","expense_date":"2021-09-07","amount":75,"date_created":"2024-01-05 02:07:10"}
-    // {"id":4,"category_id":4,"category_name":"Dining Out","description":"Dinner at a diner","expense_date":"2021-09-08","amount":30,"date_created":"2024-01-05 02:07:11"}
-    // {"id":5,"category_id":1,"category_name":"Groceries","description":"Bought vegetables","expense_date":"2021-09-05","amount":49,"date_created":"2024-01-05 02:09:06"}
-    // {"id":6,"category_id":2,"category_name":"Transportation","description":"Bike pass","expense_date":"2021-10-06","amount":10,"date_created":"2024-01-05 02:11:12"}
-    // {"id":7,"category_id":3,"category_name":"Utilities","description":"Electricity bill","expense_date":"2021-09-09","amount":175,"date_created":"2024-01-05 02:11:35"}
-    // {"id":8,"category_id":1,"category_name":"Groceries","description":"Bought vegetables","expense_date":"2021-09-05","amount":49,"date_created":"2024-01-05 02:11:47"}
-    // {"id":9,"category_id":4,"category_name":"Dining Out","description":"Pizza with friends","expense_date":"2021-09-15","amount":36,"date_created":"2024-01-06 23:26:31"}
-    // {"id":10,"category_id":5,"category_name":"Other","description":"Miscellaneous","expense_date":"2021-09-15","amount":156,"date_created":"2024-01-06 23:32:16"}
   
     return <>
-    <div className={`flex flex-col gap-8 mb-8 w-[${props.width}]`}>
+    <div className={`flex flex-col gap-8 mb-8 xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px]`}>
       <div className='text-2xl text-start'>
         Historial
       </div>

@@ -60,16 +60,16 @@ function ExpenseCardGenerator(props) {
     {categories.map((category, index) => {
 
       return <React.Fragment key={index}>
-      <div className="flex flex-col gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
+      <div className="flex flex-col gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
         {/* Contenedor card */}
-        <div className="text-lg max-sm:text-base font-bold self-end">
+        <div className="xs:text-lg text-sm font-bold self-end">
           {/* Ej.: Alojamiento */}
           {/* {expense.category_name}  */}
           {category}
         </div>
         <div className="flex flex-col gap-4">
         {/* contenedor precio + historial */}
-          <div className="flex self-end text-3xl max-sm:text-2xl font-bold">
+          <div className="flex self-end text-3xl font-bold">
               {/* Ej.: $100000 */}
               {/* Last amount registered for each category */}
               {/* TODO could modify to show category total */}
