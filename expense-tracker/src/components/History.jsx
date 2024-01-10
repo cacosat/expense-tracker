@@ -56,7 +56,7 @@ export default function History(props) {
                     <img src={ArrowUp} alt="" />
                   </div>
                 </th>
-                <th className="hidden sm:table-cell">
+                <th className="hidden md:table-cell">
                   <div className="flex gap-2 p-2">
                     <p>Descripción</p>
                     <img src={ArrowUp} alt="" />
@@ -70,10 +70,10 @@ export default function History(props) {
                   key={expense.id} 
                   className={`text-left ${index === useExpenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700`}
                 >
-                  <td className="p-2 ">{expense.expense_date}</td>
+                  <td className="p-2 min-w-[100px]">{expense.expense_date}</td>
                   <td className="p-2 ">{expense.amount}</td>
                   <td className="p-2 ">{expense.category_name}</td>
-                  <td className="p-2 hidden sm:table-cell max-w-[250px]">{expense.description}</td>
+                  <td className="p-2 hidden md:table-cell w-[250px]">{expense.description}</td>
                 </tr>
               ))}
             </tbody>
