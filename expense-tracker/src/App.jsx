@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import ExpenseCard from './components/ExpenseCard'
+import './index.css'
 import Header from './components/Header'
 import AddExpenseCard from './components/AddExpenseCard'
 import Graph from './components/Graph'
