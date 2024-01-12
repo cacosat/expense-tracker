@@ -1,4 +1,3 @@
-import { stringify } from "postcss";
 import React, { useState, useEffect } from "react";
 
 export default function AddExpenseForm() {
@@ -60,7 +59,7 @@ export default function AddExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label htmlFor="category_id" className="self-start">Category</label>
                 <select name="category_id" 
-                        id="category" 
+                        id="category_id" 
                         className="rounded-2xl p-2 border-2 border-stone-700 bg-stone-950"
                 >
                     {/* TODO fetch categories and map options to them */}
@@ -73,7 +72,8 @@ export default function AddExpenseForm() {
             <div className="flex flex-col gap-2">
                 <label htmlFor="expense_date" className="self-start">Expense Date</label>
                 <input 
-                    name="expense_date" 
+                    name="expense_date"
+                    id="expense_date" 
                     type="date" 
                     className=" rounded-2xl p-2 border-2 border-stone-700 bg-stone-950"
                 />
@@ -83,6 +83,7 @@ export default function AddExpenseForm() {
                 <label htmlFor="amount" className="self-start"> Amount</label>
                 <input 
                     name="amount" 
+                    id="amount"
                     type="number" 
                     className="rounded-2xl p-2 border-2 border-stone-700 bg-stone-950"
                 />
@@ -92,6 +93,7 @@ export default function AddExpenseForm() {
                 <label htmlFor="description" className="self-start">Description</label>
                 <input 
                     name="description" 
+                    id="description"
                     type="text" 
                     className="rounded-2xl p-2 border-2 border-stone-700 bg-stone-950"
                 />
