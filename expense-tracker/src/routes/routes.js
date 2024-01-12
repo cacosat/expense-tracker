@@ -59,8 +59,8 @@ router.get('/categories', (req, res) => {
 router.post('/expenses', (req, res) => {
     const {category_id, category_name, description, expense_date, amount} = req.body;
 
-    if (!category_id || !category_name || !description || !/^[a-zA-Z0-9\s.,'-]{1,500}$/.test(description) || !expense_date || !amount || amount <= 0) {
-        return res.status(400).json({error:'All fields required and/or invalid entry'})
+    if (!category_id || !category_name || !description || !/^[a-zA-Z0-9\s.,':;-]{1,500}$/.test(description) || !expense_date || !amount || amount <= 0) {
+        return res.status(400).json({error:'All fields required and/or invalid entry, at POST request to expenses'})
     }
 
     const postExpensesQuery = 'INSERT INTO expenses (category_id, category_name, description, expense_date, amount) VALUES (?, ?, ?, ?, ?)';
