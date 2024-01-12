@@ -50,7 +50,7 @@ export default function AddExpenseForm() {
         // second adding the name of the category to the data object
         data = {...data, category_name: categorySent.name}
         
-        giotpostDataToServer(data);
+        postDataToServer(data);
     }
 
 
