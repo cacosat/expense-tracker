@@ -31,9 +31,9 @@ export default function Header(props) {
                     {useTotal.total}
                 </h1>
             </div>
-            <div>
+            <button onClick={props.onClick}>
                 <img src={PlusIcon} />
-            </div>
+            </button>
         </div>
     </div>
     </>
