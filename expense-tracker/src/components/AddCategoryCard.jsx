@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import PlusIconSmall from "../assets/plus-circle-sm.svg"
 
-export default function AddExpenseCard(props) {
+export default function AddCategoryCard(props) {
     
     // TODO set up POST request to add categories when clicked
     
