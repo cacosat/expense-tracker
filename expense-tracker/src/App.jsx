@@ -23,7 +23,7 @@ function App() {
       <div className='flex justify-center'>
         <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
           <ExpenseCardGenerator />
-          <AddExpenseCard />
+          <AddExpenseCard onClick={onClick} />
         </div>
       </div>
 

@@ -2,12 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import PlusIconSmall from "../assets/plus-circle-sm.svg"
 
-export default function AddExpenseCard() {
+export default function AddExpenseCard(props) {
     
     // TODO set up POST request to add categories when clicked
     
     return <>
-    <div className="flex flex-col justify-center items-end gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
+    <button 
+      className="flex flex-col justify-center items-end gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700"
+      // onClick toggle modal
+      onClick={props.onClick}  
+    >
       {/* Contenedor card */}
       <div className="text-lg max-sm:text-base font-bold text-end">
         Añadir
@@ -18,6 +22,6 @@ export default function AddExpenseCard() {
             <img src={PlusIconSmall} />
         </div>
       </div>
-    </div>
+    </button>
     </>
 }

@@ -31,8 +31,8 @@ export default function Header(props) {
                     {useTotal.total}
                 </h1>
             </div>
-            <button onClick={props.onClick}>
-                <img src={PlusIcon} />
+            <button onClick={props.onClick} className="active:bg-white rounded-3xl" >
+                <img className="active:invert" src={PlusIcon} />
             </button>
         </div>
     </div>
