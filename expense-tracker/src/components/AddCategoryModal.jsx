@@ -12,7 +12,9 @@ export default function AddCategoryModal(props) {
             <div className="flex flex-col">
                 <button className="self-end" onClick={props.onClose}>X</button>
                 {/* form container */}
-                {props.children}
+                <form action="">
+                    {/* '{"id": 1, "name": "Groceries", "date_created": "2021-09-01 10:00:00"}' */}
+                </form>
             </div>
         </div>
     </>
