@@ -21,18 +21,14 @@ function App() {
   const closeCategoryModal = () => setIsExpenseCategroyOpen(false);
 
   return <>
-  <div id='test' className={`flex flex-col items-center `}>
-    <div className={`flex flex-col items-center gap-12 ${isExpenseModalOpen ? 'blur-sm' : ''}`}>
+  <div id='test' className={`flex flex-col items-center ${isCategoryModalOpen || isExpenseModalOpen ? ' blur-sm' : ''}`}>
+    <div className={`flex flex-col items-center gap-12 `}>
       <Header totalExpense='$2.157.020' iconLocation="./assets/plus-circle.svg" onClick={openExpenseModal} />
-      <AddExpenseModal isOpen={isExpenseModalOpen} onClose={closeExpenseModal}>
-        <AddExpenseForm />
-      </AddExpenseModal>
       
       <div className='flex justify-center'>
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 `}>
           <ExpenseCardGenerator />
           <AddCategoryCard onClick={openCategoryModal} />
-          <AddCategoryModal onClose={closeCategoryModal} isOpen={isCategoryModalOpen} />
         </div>
       </div>
 
@@ -44,6 +40,10 @@ function App() {
       </div>
     </div>
   </div>
+  <AddExpenseModal isOpen={isExpenseModalOpen} onClose={closeExpenseModal}>
+    <AddExpenseForm />
+  </AddExpenseModal>
+  <AddCategoryModal className={isCategoryModalOpen ? ' blur-none' : ''} onClose={closeCategoryModal} isOpen={isCategoryModalOpen} />
   </>
 };
 

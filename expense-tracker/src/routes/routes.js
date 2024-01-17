@@ -10,9 +10,9 @@ const router = express.Router();
 
 router.post('/categories', (req, res) => { // New route for HTTP POST on the path /categories
     const {name} = req.body; // getting category's 'name' property expected from the request
-    if (!name || !/^[a-zA-Z\s]{3,50}$/.test(name)) { // regex to limit to any char (and space) between 3 - 50, against which name is tested
+    if (!name || !/^[a-zA-Z0-9\s.,':;-]{3,50}$/.test(name)) { // regex to limit to any char (and space) between 3 - 50, against which name is tested
         // best practice error handling for when the request doesn't contain name, sent as JSON object w/error messg
-        return res.status(400).json({error: 'Nombre de categoría es requerido'}) // Bad request status code 400
+        return res.status(400).json({error: 'Endpoint POST categories, name invalid'}) // Bad request status code 400
     }
 
     // inserts data into the table 'categories', specifically a (?) parametrized value into 'name' column
