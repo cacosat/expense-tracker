@@ -4,6 +4,9 @@ import { Chart } from "react-google-charts";
 export default function Graph(props) {
     // hooks
 
+    // TODO replace data with actual categories and expenses, 
+    // this will be done via GET request and processing data format
+
     const data = [
         [
           'Day',
