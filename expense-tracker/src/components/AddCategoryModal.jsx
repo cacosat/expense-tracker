@@ -58,10 +58,15 @@ export default function AddCategoryModal(props) {
                 <form action="" className="flex flex-col gap-8 my-8" onSubmit={handleSubmit}>
                     {/* '{"id": 1, "name": "Groceries", "date_created": "2021-09-01 10:00:00"}' */}
                     <div className="flex flex-col gap-2">
+                        {/* 
+                        TODO: make chips to display which categories exist within AddCategoryModal
+                            and replicate within App.jsx, after the Header component
+                        
                         <label className="self-start" htmlFor="categories">Categorias </label>
                             {categories.map((category, index) => {
                                 return <div key={index}>{category.name}</div>
-                            })}
+                            })} 
+                        */}
                         <label htmlFor="category_name" className="self-start">Nombre de la nueva categoria: </label>
                         <input type="text" name="name" id="category_name" className="rounded-2xl p-2 border-2 border-stone-700 bg-stone-950" />
                     </div>

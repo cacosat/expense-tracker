@@ -37,7 +37,6 @@ function App() {
   <div id='test' className={`flex flex-col items-center ${isCategoryModalOpen || isExpenseModalOpen ? ' blur-sm' : ''}`}>
     <div className={`flex flex-col items-center gap-12 `}>
       <Header totalExpense='$2.157.020' iconLocation="./assets/plus-circle.svg" onClick={openExpenseModal} />
-      
       <div className='flex justify-center'>
         <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 `}>
           <ExpenseCardGenerator />
