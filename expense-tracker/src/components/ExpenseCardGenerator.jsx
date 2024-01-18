@@ -57,6 +57,12 @@ function ExpenseCardGenerator(props) {
     let [expensesByCat, categories] = expensesByCategory(useExpenses);
   
     return <>
+
+    {/* 
+      TODO: make each card a button (maybe use global state) so that when
+        one is closed, the graph and history relate only to that categroy
+    */}
+    
     {categories.map((category, index) => {
 
       return <React.Fragment key={index}>

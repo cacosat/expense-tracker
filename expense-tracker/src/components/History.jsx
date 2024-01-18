@@ -35,31 +35,38 @@ export default function History(props) {
         {/* Table + buttons container */}
         <section className="border-2 rounded-2xl border-stone-700 overflow-hidden">
           {/* Table container and border */}
+          
+          {/* 
+            TODO make list render in pages format with 10 items per page
+            and make the nav buttons functional for it:
+            <: atras, -1
+            >: adelante, +1
+          */}
           <table className="min-w-full">
             <thead className="text-stone-500 border-b-[1px] border-stone-700">
               <tr>
                 <th>
                   <div className="flex gap-2 p-2">
                     <p>Fecha</p>
-                    <img src={ArrowUp} alt="" />
+                    {/* <img src={ArrowUp} alt="" /> TODO: Make arrow sort on click */}
                   </div>
                 </th>
                 <th>
                   <div className="flex gap-2 p-2">
                     <p>Monto</p>
-                    <img src={ArrowUp} alt="" />
+                    {/* <img src={ArrowUp} alt="" /> TODO: Make arrow sort on click */}
                   </div>
                 </th>
                 <th>
                   <div className="flex gap-2 p-2">
                     <p>Categoría</p>
-                    <img src={ArrowUp} alt="" />
+                    {/* <img src={ArrowUp} alt="" /> TODO: Make arrow sort on click */}
                   </div>
                 </th>
                 <th className="hidden md:table-cell">
                   <div className="flex gap-2 p-2">
                     <p>Descripción</p>
-                    <img src={ArrowUp} alt="" />
+                    {/* <img src={ArrowUp} alt="" /> TODO: Make arrow sort on click */}
                   </div>
                 </th>
               </tr>
