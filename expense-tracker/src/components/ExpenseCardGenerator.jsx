@@ -60,7 +60,7 @@ function ExpenseCardGenerator(props) {
     {categories.map((category, index) => {
 
       return <React.Fragment key={index}>
-      <div className="flex flex-col gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700">
+      <div className="active:invert flex flex-col justify-end gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950">
         {/* Contenedor card */}
         <div className="xs:text-lg text-sm font-bold self-end">
           {/* Ej.: Alojamiento */}

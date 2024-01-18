@@ -68,7 +68,7 @@ export default function History(props) {
               {useExpenses.map((expense, index) => (
                 <tr 
                   key={expense.id} 
-                  className={`text-left ${index === useExpenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700`}
+                  className={`text-left ${index === useExpenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700 hover:bg-stone-950`}
                 >
                   <td className="p-2 min-w-[100px]">{expense.expense_date}</td>
                   <td className="p-2 ">{expense.amount}</td>
@@ -83,16 +83,16 @@ export default function History(props) {
           <p>1 de 10</p>
           <div className="flex gap-4">
             {/* buttons */}
-            <button className="p-2 border-2 border-stone-700 rounded-md">
+            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={DoublePrev} alt="nav button previous" />
             </button>
-            <button className="p-2 border-2 border-stone-700 rounded-md">
+            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={Prev} alt="nav button previous" />
             </button>
-            <button className="p-2 border-2 border-stone-700 rounded-md">
+            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={Next} alt="nav button next" />
             </button>
-            <button className="p-2 border-2 border-stone-700 rounded-md">
+            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={DoubleNext} alt="nav button next" />
             </button>
           </div>

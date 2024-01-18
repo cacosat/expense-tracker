@@ -9,7 +9,7 @@ export default function AddCategoryCard(props) {
   
   return <>
   <button 
-    className="active:bg-white active:text-black flex flex-col justify-center items-end gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700"
+    className="active:invert flex flex-col justify-center items-end gap-2 lg:w-[240px] lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950"
     // onClick toggle modal
     onClick={props.onClick}  
   >
@@ -19,7 +19,7 @@ export default function AddCategoryCard(props) {
     </div>
     <div className="">
     {/* contenedor ícono */}
-      <div>
+      <div className="">
           <img src={PlusIconSmall} />
       </div>
     </div>
