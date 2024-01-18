@@ -28,8 +28,8 @@ export default function AddExpenseForm() {
             if (!response.ok) {
                 throw new Error(`HTTP POST resquest error: ${response.status}`);
             }
-            const responseData = await response.json();
-            console.log(responseData);
+            // const responseData = await response.json();
+            // console.log(responseData);
         } catch (error) {
             console.error({'error in POST req': error})
         }
