@@ -20,6 +20,19 @@ function App() {
   const openCategoryModal = () => setIsExpenseCategroyOpen(true);
   const closeCategoryModal = () => setIsExpenseCategroyOpen(false);
 
+  // for every change of isExpenseModalOpen || isCategoryModalOpen,
+  // the scroll behavior updates to true or false accordingly. All
+  // this handled through a useEffect (use component lifecycle) with 
+  // dependencies of the modals so it triggers only on their change
+
+  useEffect(() => {
+    if (isExpenseModalOpen || isCategoryModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isExpenseModalOpen, isCategoryModalOpen]);
+
   return <>
   <div id='test' className={`flex flex-col items-center ${isCategoryModalOpen || isExpenseModalOpen ? ' blur-sm' : ''}`}>
     <div className={`flex flex-col items-center gap-12 `}>
@@ -40,7 +53,7 @@ function App() {
       </div>
     </div>
   </div>
-  <AddExpenseModal isOpen={isExpenseModalOpen} onClose={closeExpenseModal}>
+  <AddExpenseModal isOpen={isExpenseModalOpen} onClose={closeExpenseModal} >
     <AddExpenseForm />
   </AddExpenseModal>
   <AddCategoryModal className={isCategoryModalOpen ? ' blur-none' : ''} onClose={closeCategoryModal} isOpen={isCategoryModalOpen} />

@@ -33,7 +33,7 @@ export default function AddCategoryModal(props) {
             const responseData = response.json();
         } catch (e) {
             console.error({'error in POST category with handleSubmit': e})
-        }
+        } 
     }
 
     function handleSubmit(event) {
