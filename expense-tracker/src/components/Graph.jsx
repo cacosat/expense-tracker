@@ -25,14 +25,15 @@ export default function Graph(props) {
 
   function dataToGraphData(data) {
     let graphData = [];
+    // the format is:
+    // data = [[catgories (first one defines x axis)], 
+    // [N filas, cada una representa datos con la misma ubicación del eje x], ...];
+    // Also graphData should show 10 days x axis fixed (?)
 
     return graphData;
   }
 
-    // data will show data for last 10 days;
-    // the format is:
-    // data = [[catgories (first one defines x axis)], 
-    // [N filas, cada una representa datos con la misma ubicación del eje x], ...]
+    // data will show last 10 days fixed;
     const data = [
         [
           'Day',
