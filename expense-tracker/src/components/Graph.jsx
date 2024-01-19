@@ -1,16 +1,42 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 
 export default function Graph(props) {
     // hooks
 
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await fetch('http://localhost:4000/api/categories');
+        const dataCategories = await response.json();
+        setCategories(dataCategories)
+        console.log(dataCategories);
+      } catch (e) {
+        console.error({'error fetching categories from graph': e.message})
+      }
+    }
+    fetchCategories();
+  }, []);
+
     // TODO replace data with actual categories and expenses, 
     // this will be done via GET request and processing data format
 
+  function dataToGraphData(data) {
+    let graphData = [];
+
+    return graphData;
+  }
+
+    // data will show data for last 10 days;
+    // the format is:
+    // data = [[catgories (first one defines x axis)], 
+    // [N filas, cada una representa datos con la misma ubicación del eje x], ...]
     const data = [
         [
           'Day',
-        //   'total',
+          // 'total',
           'Alojamiento',
           'Comida',
           'Movilización',
