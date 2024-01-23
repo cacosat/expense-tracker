@@ -24,11 +24,16 @@ export default function Graph(props) {
     // this will be done via GET request and processing data format
 
   function dataToGraphData(data) {
-    let graphData = [];
+    let graphData = [[]];
     // the format is:
     // data = [[catgories (first one defines x axis)], 
     // [N filas, cada una representa datos con la misma ubicación del eje x], ...];
     // Also graphData should show 10 days x axis fixed (?)
+    
+    // first insert names into array[0] which contains array of [xAxis, name1, ..., nameN];
+    // second, insert expenses organized by index (same index === same category) into array[1]
+
+    // TODO GET request for expenses
 
     return graphData;
   }

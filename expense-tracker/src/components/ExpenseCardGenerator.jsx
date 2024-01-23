@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import TrashIcon from "../assets/trash.svg"
 
 function ExpenseCardGenerator(props) {
     // useState
     const [useExpenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), useExpenses is array of objects
-    // const [useCategories, setCategories]= useState([]); // useState to keep track of categories available
 
     // useEffect
     useEffect(() => { // useEffect let's you handle connection from component to external system
@@ -18,19 +18,6 @@ function ExpenseCardGenerator(props) {
       }
       fetchExpenses();
     }, []);
-
-    // useEffect(() => {
-    //   async function fetchCategories() {
-    //     try {
-    //       const response = await fetch('http://localhost:4000/api/categories');
-    //       const categories = await response.json();
-    //       setCategories(categories);
-    //     } catch (error) {
-    //       console.error({'failed categories fetch': error});
-    //     }
-    //   }
-    //   fetchCategories();
-    // }, []);  
     
     // functions
     const expensesByCategory = (expenses) => {
@@ -68,9 +55,10 @@ function ExpenseCardGenerator(props) {
       return <React.Fragment key={index}>
       <div className="active:invert flex flex-col justify-end gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950">
         {/* Contenedor card */}
-        <div className="xs:text-lg text-sm font-bold self-end">
+        <div className="flex justify-between  xs:text-lg text-sm font-bold ">
           {/* Ej.: Alojamiento */}
           {/* {expense.category_name}  */}
+          <img src={TrashIcon} alt="" className=" mr-4 opacity-25 hover:opacity-100" />
           {category}
         </div>
         <div className="flex flex-col gap-4">
