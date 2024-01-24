@@ -14,7 +14,6 @@ export default function Graph(props) {
         const response = await fetch('http://localhost:4000/api/categories');
         const dataCategories = await response.json();
         setCategories(dataCategories);
-        console.log(dataCategories);
       } catch (e) {
         console.error({'error fetching categories from graph': e.message})
       }
@@ -25,7 +24,6 @@ export default function Graph(props) {
         const response = await fetch('http://localhost:4000/api/expenses');
         const expensesData = await response.json();
         setExpenses(expensesData);
-        console.log(expensesData);
       } catch (e) {
         console.error({'error fetching expenses from graph': e.message});
       }
@@ -33,23 +31,29 @@ export default function Graph(props) {
     fetchExpenses();
   }, []);
 
-    // TODO replace data with actual categories and expenses, 
-    // this will be done via GET request and processing data format
-
-  function dataToGraphData(data) {
-    let graphData = [[]];
+  function dataToGraphData(categoriesData, expensesData) {
     // the format is:
     // data = [[catgories (first one defines x axis)], 
     // [N filas, cada una representa datos con la misma ubicación del eje x], ...];
     // Also graphData should show 10 days x axis fixed (?)
     
+    let graphData = [[]];
+    
+    
     // first insert names into array[0] which contains array of [xAxis, name1, ..., nameN];
     // second, insert expenses organized by index (same index === same category) into array[1]
+        
+    for (let i = 0; i < categoriesData.length; i++){
+      graphData[0].push(categoriesData[i].name);
 
-    // TODO GET request for expenses
-
+      let expensesByCategory = expensesData.filter((expense) => expense.category_name === categoriesData[i].name);
+      graphData.push(expensesByCategory);
+    }
+    console.log(graphData)
+    
     return graphData;
   }
+  dataToGraphData(categories, expenses);
 
     // data will show last 10 days fixed;
     const data = [
@@ -93,6 +97,10 @@ export default function Graph(props) {
         hAxis: {
             textStyle: { color: '#FFFFFF' }, // Custom color for horizontal axis labels
             gridlines: { color: 'transparent' },
+            // viewWindow: { // modify depending on width
+            //   min: 0,
+            //   max: 5
+            // },
         },
         vAxis: {
             textStyle: { color: '#FFFFFF' }, // Custom color for vertical axis labels
