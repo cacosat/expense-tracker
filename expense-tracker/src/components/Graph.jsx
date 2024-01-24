@@ -5,19 +5,32 @@ import { Chart } from "react-google-charts";
 export default function Graph(props) {
     // hooks
 
+  const [expenses, setExpenses] = useState([]);
   const [categories, setCategories] = useState([]);
+  
   useEffect(() => {
     async function fetchCategories() {
       try {
         const response = await fetch('http://localhost:4000/api/categories');
         const dataCategories = await response.json();
-        setCategories(dataCategories)
+        setCategories(dataCategories);
         console.log(dataCategories);
       } catch (e) {
         console.error({'error fetching categories from graph': e.message})
       }
     }
     fetchCategories();
+    async function fetchExpenses() {
+      try {
+        const response = await fetch('http://localhost:4000/api/expenses');
+        const expensesData = await response.json();
+        setExpenses(expensesData);
+        console.log(expensesData);
+      } catch (e) {
+        console.error({'error fetching expenses from graph': e.message});
+      }
+    }
+    fetchExpenses();
   }, []);
 
     // TODO replace data with actual categories and expenses, 
