@@ -57,9 +57,10 @@ function ExpenseCardGenerator(props) {
         {/* Contenedor card */}
         <div className="flex justify-between  xs:text-lg text-sm font-bold ">
           {/* Ej.: Alojamiento */}
-          {/* {expense.category_name}  */}
           <img src={TrashIcon} alt="" className=" mr-4 opacity-25 hover:opacity-100" />
-          {category}
+          <div className={category === null ? '' : (category.length >= 12 ? 'break-all' : 'break-words')}>
+            {category} 
+          </div>
         </div>
         <div className="flex flex-col gap-4">
         {/* contenedor precio + historial */}

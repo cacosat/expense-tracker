@@ -38,7 +38,7 @@ function App() {
     <div className={`flex flex-col items-center gap-12 `}>
       <Header totalExpense='$2.157.020' iconLocation="./assets/plus-circle.svg" onClick={openExpenseModal} />
       <div className='flex justify-center'>
-        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 `}>
+        <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 m-2 `}>
           <ExpenseCardGenerator />
           <AddCategoryCard onClick={openCategoryModal} />
         </div>
