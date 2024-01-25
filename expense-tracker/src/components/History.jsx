@@ -5,6 +5,7 @@ import Prev from "../assets/chevron-down.svg"
 import DoublePrev from "../assets/chevron-double-down.svg"
 import Next from "../assets/chevron-up.svg"
 import DoubleNext from "../assets/chevron-double-up.svg"
+import infoTooltip from '../assets/info.svg'
 
 export default function History(props) {
     // hooks
@@ -28,8 +29,9 @@ export default function History(props) {
   
     return <>
     <div className={`flex flex-col gap-8 mb-8 xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px]`}>
-      <div className='text-2xl text-start'>
+      <div className='flex justify-between text-2xl text-start'>
         Historial
+        <img src={infoTooltip} alt="info icon"  />
       </div>
       <section className="flex flex-col justify-center gap-4 sm:p-8 sm:border-2 sm:border-stone-700 sm:rounded-2xl">
         {/* Table + buttons container */}
