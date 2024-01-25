@@ -47,10 +47,10 @@ function ExpenseCardGenerator(props) {
 
     {/* 
       TODO: 
-      
-      1.make each card a button (maybe use global state) so that when
+      1. DELETE request when clicking trashcan (deletes category and expenses) 
+      2. make it so there are a fixed num of cards visible (6), but with a 'View more' button to expand
+      3. make each card a button (maybe use global state) so that when
         one is closed, the graph and history relate only to that categroy
-      2.make it so there are a fixed num of cards visible (6), but with a 'View more' button to expand
     */}
     
     {categories.map((category, index) => {
