@@ -81,7 +81,7 @@ export default function Graph(props) {
     return <>
     <div  className="flex flex-col gap-8">
       <div className='text-2xl text-start'>
-        Gráfico de Gastos
+        Gastos por categoría
       </div>
       <div className={`flex flex-col xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px] justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden`}>
         <Chart
