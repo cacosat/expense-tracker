@@ -37,8 +37,6 @@ export default function Graph(props) {
     
     let graphData = [];
     graphData.push(['Categories', 'Total Expenses'])
-    // TODO: 
-    // 1. calculate total expenses
     categoriesData.forEach((category) => {
       let catName = category.name;
       let categoryExpenses = expensesData.filter(expense => category.name === expense.category_name);

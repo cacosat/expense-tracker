@@ -41,7 +41,7 @@ export default function AddCategoryModal(props) {
         const formData = new FormData(event.target);
         const payload = Object.fromEntries(formData.entries());
 
-        event.preventDefault(); // prevents refresh
+        // event.preventDefault(); // prevents refresh
         
         postPayload(payload);
     }

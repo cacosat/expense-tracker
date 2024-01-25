@@ -39,7 +39,7 @@ export default function AddExpenseForm() {
         const formData = new FormData(event.target); // Construct a set of key/value pairs of form fields and their values
         let data = Object.fromEntries(formData.entries()); // entries() return key/value pairs, and Object gives it JS obj functionality
         
-        event.preventDefault(); // prevents refresh of the page
+        // event.preventDefault(); // prevents refresh of the page
 
         // add category_name to data payload by:
         // first finding the category that is being sent
