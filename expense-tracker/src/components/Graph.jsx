@@ -37,35 +37,15 @@ export default function Graph(props) {
     // [N filas, cada una representa datos con la misma ubicación del eje x], ...];
     // Also graphData should show 10 days x axis fixed (?)
     
-    let graphData = [[]];
     
-    
-    // first insert names into array[0] which contains array of [xAxis, name1, ..., nameN];
-    // second, insert expenses organized by index (same index === same category) into array[1]
-        
-    for (let i = 0; i < categoriesData.length; i++){
-      graphData[0].push(categoriesData[i].name);
 
-      let expensesByCategory = expensesData.filter((expense) => expense.category_name === categoriesData[i].name);
-      graphData.push(expensesByCategory);
-    }
-    console.log(graphData)
-    
     return graphData;
   }
   dataToGraphData(categories, expenses);
 
     // data will show last 10 days fixed;
     const data = [
-        [
-          'Day',
-          // 'total',
-          'Alojamiento',
-          'Comida',
-          'Movilización',
-          'Entretenimiento',
-          'Otros',
-        ],
+        ['Day',/* 'total',*/ 'Alojamiento', 'Comida', 'Movilización', 'Entretenimiento','Otros',],
         [1, 168990, 7800, 15620, 25800, 8000],
         [2, 0, 9500, 130000, 15000, 15000],
         [3, 0, 12000, 10590, 6700, 19852],
