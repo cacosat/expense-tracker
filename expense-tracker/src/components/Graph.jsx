@@ -74,7 +74,8 @@ export default function Graph(props) {
             textStyle: {color: '#FFFFFF'},
             maxLines: 2 
         },
-        pieSliceBorderColor: '#000000'
+        pieSliceBorderColor: '#000000',
+        sliceVisibilityThreshold: 0.2, // % of the total graph
         // colors: ['#D32F2F', '#1976D2', '#388E3C', '#FBC02D', '#7B1FA2'],
     };
 
