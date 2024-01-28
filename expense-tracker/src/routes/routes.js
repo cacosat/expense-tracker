@@ -117,6 +117,9 @@ router.get('/expenses/total', (req, res) => {
     });
 });
 
+// Endpoint 6: DELETE request on categories with id specified through URL param
+
+router.delete('path', (req, res) => {});
 
 // Export
 

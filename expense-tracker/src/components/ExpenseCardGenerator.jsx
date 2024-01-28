@@ -54,19 +54,36 @@ function ExpenseCardGenerator(props) {
       return [result, categories]; // result of type {category_name: [{expense1}, {expense 2}, {expenseN}],}
     }
 
+    async function deleteCategory(id) {
+      try {
+        const response = fetch(`http://localhost:4000/api/categories/:${id}`, {
+          method: 'DELETE', 
+        })
+        if (!response.ok) {
+          throw new Error(`Error in delete req: ${(await response).statusText}`)
+        } else {
+          alert('Succesful deletion');
+        }
+      } catch (e) {
+        console.error({'error on delete request': e})
+      }
+    }
+
     function handleCardClick() {
       alert("Category selection under construction.");
     }
 
     function handleDelClick(categoryName, categories, e) {
-      e.stopPropagation(); // stops click from going up the tree
+      e.stopPropagation(); // stops click from going up (bubbling up) the DOM tree
       alert("Deleted");
-      // TODO: DELETE request to delete categories and expenses associated
       
       let categoryId;
       console.log(categoryName);
       if (typeof categoryName === 'string') {
         categoryId = (categories.find((category) => categoryName === category.name)).id
+        
+        // TODO: DELETE request to delete categories and expenses associated
+      
       }
 
       console.log(categoryId);
