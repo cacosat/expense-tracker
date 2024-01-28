@@ -2,6 +2,19 @@ import React, { useEffect, useState } from "react";
 import TrashIcon from "../assets/trash.svg"
 
 function ExpenseCardGenerator(props) {
+    // fetching categories
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+      async function fetchCategories() {
+        const response = await fetch('http://localhost:4000/api/categories');
+        const categoriesData = await response.json();
+        setCategories(categoriesData);
+      }
+      fetchCategories();
+    }, [])
+
+    // Fetching expenses
     // useState
     const [useExpenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), useExpenses is array of objects
 
@@ -41,7 +54,25 @@ function ExpenseCardGenerator(props) {
       return [result, categories]; // result of type {category_name: [{expense1}, {expense 2}, {expenseN}],}
     }
 
-    let [expensesByCat, categories] = expensesByCategory(useExpenses);
+    function handleCardClick() {
+      alert("Category selection under construction.");
+    }
+
+    function handleDelClick(categoryName, categories, e) {
+      e.stopPropagation(); // stops click from going up the tree
+      alert("Deleted");
+      // TODO: DELETE request to delete categories and expenses associated
+      
+      let categoryId;
+      console.log(categoryName);
+      if (typeof categoryName === 'string') {
+        categoryId = (categories.find((category) => categoryName === category.name)).id
+      }
+
+      console.log(categoryId);
+    }
+
+    let [expensesByCat, categoriesNames] = expensesByCategory(useExpenses);
   
     return <>
 
@@ -53,14 +84,23 @@ function ExpenseCardGenerator(props) {
         one is closed, the graph and history relate only to that categroy
     */}
     
-    {categories.map((category, index) => {
+    {categoriesNames.map((category, index) => {
 
       return <React.Fragment key={index}>
-      <div className="active:invert flex flex-col justify-end gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950">
+      <div 
+        onClick={handleCardClick} 
+        id={category} 
+        className="active:invert flex flex-col justify-end gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950"
+      >
         {/* Contenedor card */}
         <div className="flex justify-between  xs:text-lg text-sm font-bold ">
           {/* Ej.: Alojamiento */}
-          <img src={TrashIcon} alt="" className=" mr-4 opacity-25 hover:opacity-100" />
+          <img 
+            src={TrashIcon} 
+            alt="delete icon" 
+            onClick={(e) => handleDelClick(category, categories, e)} //event handlers automatically pass event, for more args you need arrow function
+            className=" mr-4 opacity-25 hover:opacity-100 cursor-pointer" 
+          />
           <div className={category === null ? '' : (category.length >= 12 ? 'break-all' : 'break-words')}>
             {category} 
           </div>
