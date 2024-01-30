@@ -119,7 +119,24 @@ router.get('/expenses/total', (req, res) => {
 
 // Endpoint 6: DELETE request on categories with id specified through URL param
 
-router.delete('path', (req, res) => {});
+router.delete('/categories/:id', (req, res) => {
+    // req.params.id access URL parameter}
+    const id = req.params.id;
+    const query = "DELETE FROM categories WHERE id = ?";
+
+    db.run(query, id, (error) => {
+        if (error) {
+            res.status(500).json({error: error.message})
+        } else { // here the idea is to check if there was actually a deletion
+            if (this.changes > 0) { // checked to see if any rows were affected (deleted)
+                res.status(200).json({'id deleted': id});
+            } else {
+                res.status(404).json({message: 'id not found for deletion'})
+            }
+        }
+    });
+
+});
 
 // Export
 

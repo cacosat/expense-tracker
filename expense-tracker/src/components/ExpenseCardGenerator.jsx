@@ -62,10 +62,10 @@ function ExpenseCardGenerator(props) {
         if (!response.ok) {
           throw new Error(`Error in delete req: ${(await response).statusText}`)
         } else {
-          alert('Succesful deletion');
+          alert('Succesful deletion from funct deleteCategory');
         }
       } catch (e) {
-        console.error({'error on delete request': e})
+        console.error({'error on deleteCategory DEL request': e})
       }
     }
 
@@ -75,15 +75,13 @@ function ExpenseCardGenerator(props) {
 
     function handleDelClick(categoryName, categories, e) {
       e.stopPropagation(); // stops click from going up (bubbling up) the DOM tree
-      alert("Deleted");
       
       let categoryId;
       console.log(categoryName);
       if (typeof categoryName === 'string') {
         categoryId = (categories.find((category) => categoryName === category.name)).id
-        
-        // TODO: DELETE request to delete categories and expenses associated
-      
+        deleteCategory(categoryId); 
+        alert("deleteCategory (fetch DELETE req) within component triggered");
       }
 
       console.log(categoryId);
