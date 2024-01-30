@@ -56,11 +56,12 @@ function ExpenseCardGenerator(props) {
 
     async function deleteCategory(id) {
       try {
-        const response = fetch(`http://localhost:4000/api/categories/:${id}`, {
+        const response = await fetch(`http://localhost:4000/api/categories/${id}`, {
           method: 'DELETE', 
-        })
+        });
+        console.log(`http://localhost:4000/api/categories/${id}`)
         if (!response.ok) {
-          throw new Error(`Error in delete req: ${(await response).statusText}`)
+          throw new Error(`Error in delete req: ${await response.statusText}`)
         } else {
           alert('Succesful deletion from funct deleteCategory');
         }
@@ -76,15 +77,13 @@ function ExpenseCardGenerator(props) {
     function handleDelClick(categoryName, categories, e) {
       e.stopPropagation(); // stops click from going up (bubbling up) the DOM tree
       
-      let categoryId;
-      console.log(categoryName);
-      if (typeof categoryName === 'string') {
-        categoryId = (categories.find((category) => categoryName === category.name)).id
+      let category = categories.find((category) => categoryName === category.name); // finds corresponding category
+      if (category != undefined) {
+        let categoryId = category.id;
+        console.log(categoryId)
         deleteCategory(categoryId); 
         alert("deleteCategory (fetch DELETE req) within component triggered");
       }
-
-      console.log(categoryId);
     }
 
     let [expensesByCat, categoriesNames] = expensesByCategory(useExpenses);
