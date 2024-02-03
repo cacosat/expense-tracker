@@ -15,11 +15,10 @@ function ExpenseCardGenerator(props) {
     }, [])
 
     // Fetching expenses
-    // useState
-    const [useExpenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), useExpenses is array of objects
+    const [expenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), expense is array of objects
 
-    // useEffect
-    useEffect(() => { // useEffect let's you handle connection from component to external system
+    // useEffect let's you handle connection from component to external system
+    useEffect(() => { 
       async function fetchExpenses() {
         try {
           const response = await fetch('http://localhost:4000/api/expenses');
@@ -32,29 +31,27 @@ function ExpenseCardGenerator(props) {
       fetchExpenses();
     }, []);
     
-    // functions
-    const expensesByCategory = (expenses) => {
-      // TODO: reduce to single for loop
-      let result = {};
+    // ----------------------------------------------------------------
+    // Functions
+    // ----------------------------------------------------------------
 
-      let categories = []; // contains all category names
-      expenses.forEach((expense) => {
-        if (!categories.includes(expense.category_name)) {
-          categories.push(expense.category_name);
-          result[expense.category_name] = []; // adding {category_name : []} to result
-        }
+    // sort expenses by category with resulting format of: 
+    // [{category_name: [{expense1}, {expense 2}, {expenseN}]}, {category_name: ...}]
+    const expensesByCategory = (expenses, categories) => {
+      // 1. Generate resulting array with categories and empty arrays for their expenses: [{category_name: []}]
+      let result = []; 
+      let categoriesNameList = [];
+      categories.forEach((category) => {
+        const categoryName = category.name;
+        categoriesNameList.push(categoryName)
+        const categoryObj = {[categoryName]: expenses.filter((expense) => expense.category_name === categoryName)};
+        result.push(categoryObj);
       });
 
-      expenses.forEach((expense) => {
-        if (categories.includes(expense.category_name)) {
-          result[expense.category_name].push(expense);
-        }
-      });
-
-      return [result, categories]; // result of type {category_name: [{expense1}, {expense 2}, {expenseN}],}
+      return [result, categoriesNameList];
     }
 
-    async function deleteCategory(id) {
+    async function deleteCategory(id, name) {
       try {
         const response = await fetch(`http://localhost:4000/api/categories/${id}`, {
           method: 'DELETE', 
@@ -62,7 +59,7 @@ function ExpenseCardGenerator(props) {
         if (!response.ok) {
           throw new Error(`Error in delete req: ${response.statusText}`)
         } else {
-          alert('Succesful deletion from funct deleteCategory');
+          alert(`Eliminado correctamente: Categoría ${name} (id: ${id})`);
         }
       } catch (e) {
         console.error({'error on deleteCategory DEL request': e})
@@ -79,12 +76,11 @@ function ExpenseCardGenerator(props) {
       let category = categories.find((category) => categoryName === category.name); // finds corresponding category
       if (category != undefined) {
         let categoryId = category.id;
-        deleteCategory(categoryId); 
-        alert("deleteCategory (fetch DELETE req) within component triggered");
+        deleteCategory(categoryId, categoryName); 
       }
     }
 
-    let [expensesByCat, categoriesNames] = expensesByCategory(useExpenses);
+    let [expensesByCat, categoriesNames] = expensesByCategory(expenses, categories);
   
     return <>
 
@@ -123,16 +119,17 @@ function ExpenseCardGenerator(props) {
               {/* Ej.: $100000 */}
               {/* Last amount registered for each category */}
               {/* TODO could modify to show category total */}
-              {expensesByCat[category][expensesByCat[category].length-1].amount}              
+              {expensesByCat[index][category][expensesByCat[index][category].length-1].amount} {/* 1st, access object, then array stored as category, and then index (last/most recent) of said array */}
+              {/* {expensesByCat[category][expensesByCat[category].length-1].amount}               */}
           </div>
           <div className="flex justify-between text-sm text-stone-500 max-sm:hidden">
               <div>
                 {/* Ej.: 25 de dic. */}
-                {expensesByCat[category].length <= 1 ? '-' : expensesByCat[category][expensesByCat[category].length-2].expense_date}
+                {expensesByCat[index][category].length <= 1 ? '-' : expensesByCat[index][category][expensesByCat[index][category].length-2].expense_date}
               </div>
               <div>
                 {/* Ej.: $9000 */}
-                {expensesByCat[category].length <= 1 ? '-' : expensesByCat[category][expensesByCat[category].length-2].amount}
+                {expensesByCat[index][category].length <= 1 ? '-' : expensesByCat[index][category][expensesByCat[index][category] .length-2].amount}
               </div>
           </div>
         </div>
