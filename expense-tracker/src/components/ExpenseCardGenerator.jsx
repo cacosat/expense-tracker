@@ -59,9 +59,8 @@ function ExpenseCardGenerator(props) {
         const response = await fetch(`http://localhost:4000/api/categories/${id}`, {
           method: 'DELETE', 
         });
-        console.log(`http://localhost:4000/api/categories/${id}`)
         if (!response.ok) {
-          throw new Error(`Error in delete req: ${await response.statusText}`)
+          throw new Error(`Error in delete req: ${response.statusText}`)
         } else {
           alert('Succesful deletion from funct deleteCategory');
         }
@@ -80,7 +79,6 @@ function ExpenseCardGenerator(props) {
       let category = categories.find((category) => categoryName === category.name); // finds corresponding category
       if (category != undefined) {
         let categoryId = category.id;
-        console.log(categoryId)
         deleteCategory(categoryId); 
         alert("deleteCategory (fetch DELETE req) within component triggered");
       }

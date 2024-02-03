@@ -126,7 +126,7 @@ router.delete('/categories/:id', (req, res) => {
     
     console.log("Requested ID:", req.params.id);
     console.log("Requested URL:", req.originalUrl);
-    db.run(query, id, (error) => {
+    db.run(query, id, function (error) {
         if (error) {
             res.status(500).json({error: error.message})
         } else { // here the idea is to check if there was actually a deletion
