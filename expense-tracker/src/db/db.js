@@ -10,10 +10,11 @@ const db = new sqlite3.Database('./expense-tracker.db', (e) => {
             if (e) {
                 console.error({'error allowing foreign key constraints': e.message});
             } else {
-                console.log('DB connected and foreign keys contrains')
+                console.log('DB connected and foreign keys contrains allowed')
                 createTables();
             }
         }); 
+        // createTables();
     }
 });
 
@@ -37,10 +38,9 @@ CREATE TABLE IF NOT EXISTS expenses(
     expense_date TEXT NOT NULL,
     amount REAL NOT NULL, 
     date_created TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+    FOREIGN KEY (category_id, category_name) REFERENCES categories(id, name) ON DELETE CASCADE
     );
     `;
-    // FOREIGN KEY (category_name) REFERENCES categories(name) ON DELETE CASCADE
 
 // Create tables: executing SQL commands (passing command + callback for error handling)
 function createTables() {
