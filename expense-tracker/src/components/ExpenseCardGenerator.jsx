@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TrashIcon from "../assets/trash.svg"
+import { text } from "body-parser";
 
 function ExpenseCardGenerator(props) {
     // fetching categories
@@ -46,6 +47,7 @@ function ExpenseCardGenerator(props) {
         categoriesNameList.push(categoryName)
         const categoryObj = {[categoryName]: expenses.filter((expense) => expense.category_name === categoryName)};
         result.push(categoryObj);
+        console.log(categoryObj)
       });
 
       return [result, categoriesNameList];
@@ -98,7 +100,7 @@ function ExpenseCardGenerator(props) {
       <div 
         onClick={handleCardClick} 
         id={category} 
-        className="active:invert flex flex-col justify-end gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950"
+        className="active:invert flex flex-col justify-between gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950"
       >
         {/* Contenedor card */}
         <div className="flex justify-between  xs:text-lg text-sm font-bold ">
@@ -115,12 +117,11 @@ function ExpenseCardGenerator(props) {
         </div>
         <div className="flex flex-col gap-4">
         {/* contenedor precio + historial */}
-          <div className="flex self-end text-3xl font-bold">
+          <div className={`flex self-end ${expensesByCat[index][category].length <= 1 ? 'text-xl text-stone-600' : 'text-3xl font-bold'}`}>
               {/* Ej.: $100000 */}
               {/* Last amount registered for each category */}
               {/* TODO could modify to show category total */}
-              {expensesByCat[index][category][expensesByCat[index][category].length-1].amount} {/* 1st, access object, then array stored as category, and then index (last/most recent) of said array */}
-              {/* {expensesByCat[category][expensesByCat[category].length-1].amount}               */}
+              {expensesByCat[index][category].length === 0 ? 'No expenses' : expensesByCat[index][category][expensesByCat[index][category].length-1].amount} {/* 1st, access object, then array stored as category, and then index (last/most recent) of said array */}
           </div>
           <div className="flex justify-between text-sm text-stone-500 max-sm:hidden">
               <div>

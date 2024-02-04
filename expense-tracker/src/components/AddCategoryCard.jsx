@@ -15,7 +15,7 @@ export default function AddCategoryCard(props) {
   >
     {/* Contenedor card */}
     <div className="text-lg max-sm:text-base font-bold text-end">
-      Añadir
+      Añadir Categoría
     </div>
     <div className="">
     {/* contenedor ícono */}
