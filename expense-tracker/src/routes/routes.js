@@ -57,16 +57,16 @@ router.get('/categories', (req, res) => {
 // Endpoint 3: Adding new expenses through HTTP POST path /expenses
 
 router.post('/expenses', (req, res) => {
-    const {category_id, category_name, description, expense_date, amount} = req.body;
+    const {category_id,  description, expense_date, amount} = req.body;
 
-    if (!category_id || !category_name || !description || !/^[a-zA-Z0-9\s.,':;-]{1,500}$/.test(description) || !expense_date || !amount || amount <= 0) {
+    if (!category_id || !description || !/^[a-zA-Z0-9\s.,':;-]{1,500}$/.test(description) || !expense_date || !amount || amount <= 0) {
         return res.status(400).json({error:'All fields required and/or invalid entry, at POST request to expenses'})
     }
 
-    const postExpensesQuery = 'INSERT INTO expenses (category_id, category_name, description, expense_date, amount) VALUES (?, ?, ?, ?, ?)';
+    const postExpensesQuery = 'INSERT INTO expenses (category_id, description, expense_date, amount) VALUES (?, ?, ?, ?)';
 
     // Database.run() when no value is expected
-    db.run(postExpensesQuery, [category_id, category_name, description, expense_date, amount], function(error) {
+    db.run(postExpensesQuery, [category_id, description, expense_date, amount], function(error) {
         if (error) {
             return res.status(500).json({error: error.message});
         }

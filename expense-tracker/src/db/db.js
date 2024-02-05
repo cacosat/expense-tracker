@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS expenses(
     expense_date TEXT NOT NULL,
     amount REAL NOT NULL, 
     date_created TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id, category_name) REFERENCES categories(id, name) ON DELETE CASCADE
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
     );
     `;
 

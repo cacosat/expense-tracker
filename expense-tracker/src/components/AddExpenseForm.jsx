@@ -47,8 +47,8 @@ export default function AddExpenseForm() {
             return category.id.toString() === data.category_id // arrow func with {} needs explicit return
         });
         // second adding the name of the category to the data object
-        data = {...data, category_name: categorySent.name}
-        
+        // data = {...data, category_name: categorySent.name};
+        console.log(data);
         postDataToServer(data);
     }
 

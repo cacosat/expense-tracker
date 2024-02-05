@@ -47,7 +47,6 @@ function ExpenseCardGenerator(props) {
         categoriesNameList.push(categoryName)
         const categoryObj = {[categoryName]: expenses.filter((expense) => expense.category_name === categoryName)};
         result.push(categoryObj);
-        console.log(categoryObj)
       });
 
       return [result, categoriesNameList];
