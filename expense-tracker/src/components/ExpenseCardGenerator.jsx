@@ -86,7 +86,6 @@ function ExpenseCardGenerator(props) {
   }
 
   let [expensesByCat, categoriesNames] = expensesByCategory(expenses, categories);
-  console.log([expensesByCat, categoriesNames])
   {/* 
     TODO: 
     - [x] DELETE request when clicking trashcan (deletes category and expenses) 
