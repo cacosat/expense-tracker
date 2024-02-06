@@ -1,96 +1,58 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import useTotalExpensesByCategory from "../hooks/useTotalExpensesByCategory"; // custom hook
 import { Chart } from "react-google-charts";
 import infoTooltip from '../assets/info.svg'
 
 export default function Graph(props) {
-    // hooks
-    const [expenses, setExpenses] = useState([]);
-    const [categories, setCategories] = useState([]);
+  // Custom hooks
+  const totalExpensesByCategory = useTotalExpensesByCategory()
+  const graphData = totalExpensesByCategory();
+  const columnNames = ['Categories', 'Total Expenses'];
+  graphData.unshift(columnNames);
     
-    useEffect(() => {
-      async function fetchCategories() {
-        try {
-          const response = await fetch('http://localhost:4000/api/categories');
-          const dataCategories = await response.json();
-          setCategories(dataCategories);
-        } catch (e) {
-          console.error({'error fetching categories from graph': e.message})
-        }
-      }
-      fetchCategories();
-      async function fetchExpenses() {
-        try {
-          const response = await fetch('http://localhost:4000/api/expenses');
-          const expensesData = await response.json();
-          setExpenses(expensesData);
-        } catch (e) {
-          console.error({'error fetching expenses from graph': e.message});
-        }
-      }
-      fetchExpenses();
-    }, []);
+  const options = {
+      // title: 'titulo',
+      titleTextStyle: {color: 'white'},
+      pieHole: 0.5,
+      backgroundColor: 'transparent',
+      chartArea: {
+        top: '25%',
+      },
+      legend: { 
+          position: "top", 
+          alignment: "center",
+          textStyle: {color: '#FFFFFF'},
+          maxLines: 2 
+      },
+      pieSliceBorderColor: '#000000',
+      sliceVisibilityThreshold: 0.2, // % of the total graph
+      // colors: ['#D32F2F', '#1976D2', '#388E3C', '#FBC02D', '#7B1FA2'],
+  };
 
-    function rawDataToGraphData(categoriesData, expensesData) {
-      // the format is each row represent a slice [category, totalAmount],
-      // first row is [sliceLabels, sliceValues], here: ['Categories', 'Total Expenses']
-      
-      let graphData = [];
-      graphData.push(['Categories', 'Total Expenses'])
-      categoriesData.forEach((category) => {
-        let categoryExpenses = expensesData.filter(expense => category.id === expense.category_id);
-        let categoryExpensesTotal = categoryExpenses.reduce((total, expense) => {
-          return total + expense.amount;
-        }, 0);
-        graphData.push([category.name, categoryExpensesTotal]);
-      })
-      
-      return graphData;
-    }
-    const data = rawDataToGraphData(categories, expenses);
-    
-    const options = {
-        // title: 'titulo',
-        titleTextStyle: {color: 'white'},
-        pieHole: 0.5,
-        backgroundColor: 'transparent',
-        chartArea: {
-          top: '25%',
-        },
-        legend: { 
-            position: "top", 
-            alignment: "center",
-            textStyle: {color: '#FFFFFF'},
-            maxLines: 2 
-        },
-        pieSliceBorderColor: '#000000',
-        sliceVisibilityThreshold: 0.2, // % of the total graph
-        // colors: ['#D32F2F', '#1976D2', '#388E3C', '#FBC02D', '#7B1FA2'],
-    };
-
-    return <>
-    <div  className="flex flex-col gap-8">
-      <div className='text-2xl text-start'>
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-2">
-            <div>
-              Gastos por categoría
-            </div>
-            <div className="text-lg text-stone-500">
-              {data.length <= 1 ? 'No hay información' : ''}
-            </div>
-          </div>  
-          <img src={infoTooltip} alt="info icon" />
-        </div>
-      </div>
-      <div className={`flex flex-col xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px] justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden`}>
-        <Chart
-            chartType="PieChart"
-            height= "350px"
-            data={data}
-            options={options}
-        />
+  return <>
+  <div  className="flex flex-col gap-8">
+    <div className='text-2xl text-start'>
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-2">
+          <div>
+            Gastos por categoría
+          </div>
+          <div className="text-lg text-stone-500">
+            {graphData.length > 1 ? '' : 'No hay información'}
+          </div>
+        </div>  
+        <img src={infoTooltip} alt="info icon" />
       </div>
     </div>
-    </>
+    <div className={`flex flex-col xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px] justify-center py-4 border-2 rounded-2xl border-stone-700 overflow-hidden`}>
+      <Chart
+          chartType="PieChart"
+          height= "350px"
+          data={graphData}
+          options={options}
+      />
+    </div>
+  </div>
+  </>
 }
