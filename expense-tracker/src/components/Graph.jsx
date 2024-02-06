@@ -38,8 +38,7 @@ export default function Graph(props) {
       let graphData = [];
       graphData.push(['Categories', 'Total Expenses'])
       categoriesData.forEach((category) => {
-        let catName = category.name;
-        let categoryExpenses = expensesData.filter(expense => category.name === expense.category_name);
+        let categoryExpenses = expensesData.filter(expense => category.id === expense.category_id);
         let categoryExpensesTotal = categoryExpenses.reduce((total, expense) => {
           return total + expense.amount;
         }, 0);
@@ -73,7 +72,14 @@ export default function Graph(props) {
     <div  className="flex flex-col gap-8">
       <div className='text-2xl text-start'>
         <div className="flex justify-between">
-          Gastos por categoría
+          <div className="flex flex-col gap-2">
+            <div>
+              Gastos por categoría
+            </div>
+            <div className="text-lg text-stone-500">
+              {data.length <= 1 ? 'No hay información' : ''}
+            </div>
+          </div>  
           <img src={infoTooltip} alt="info icon" />
         </div>
       </div>

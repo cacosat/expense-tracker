@@ -33,7 +33,6 @@ const createExpensesTable = `
 CREATE TABLE IF NOT EXISTS expenses(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     category_id INTEGER, 
-    category_name TEXT,
     description TEXT, 
     expense_date TEXT NOT NULL,
     amount REAL NOT NULL, 

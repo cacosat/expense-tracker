@@ -28,7 +28,7 @@ export default function Header(props) {
                     Total
                 </h3>
                 <h1 className="text-4xl font-bold">
-                    {useTotal.total}
+                    {useTotal.total === null || useTotal.total === undefined ? 0 : useTotal.total}
                 </h1>
             </div>
             <button onClick={props.onClick} className="active:bg-white rounded-3xl hover:bg-stone-950" >

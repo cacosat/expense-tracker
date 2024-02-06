@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TrashIcon from "../assets/trash.svg"
-import { text } from "body-parser";
+// import { text } from "body-parser"; // throws error of "Module externalized for browser compatibility"
 
 function ExpenseCardGenerator(props) {
     // fetching categories
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
+      // useEffect let's you handle connection from component to external system
       async function fetchCategories() {
         const response = await fetch('http://localhost:4000/api/categories');
         const categoriesData = await response.json();
@@ -18,7 +19,6 @@ function ExpenseCardGenerator(props) {
     // Fetching expenses
     const [expenses, setExpenses] = useState([]); // useState to keep track of API data (expenses), expense is array of objects
 
-    // useEffect let's you handle connection from component to external system
     useEffect(() => { 
       async function fetchExpenses() {
         try {
@@ -39,7 +39,6 @@ function ExpenseCardGenerator(props) {
     // sort expenses by category with resulting format of: 
     // [{category_name: [{expense1}, {expense 2}, {expenseN}]}, {category_name: ...}]
     const expensesByCategory = (expenses, categories) => {
-      // 1. Generate resulting array with categories and empty arrays for their expenses: [{category_name: []}]
       let result = []; 
       let categoriesNameList = [];
       categories.forEach((category) => {
@@ -74,7 +73,7 @@ function ExpenseCardGenerator(props) {
     function handleDelClick(categoryName, categories, e) {
       e.stopPropagation(); // stops click from going up (bubbling up) the DOM tree
       
-      let category = categories.find((category) => categoryName === category.name); // finds corresponding category
+      let category = categories.find((category) => categoryName === category.name); // finds corresponding category by name
       if (category != undefined) {
         let categoryId = category.id;
         deleteCategory(categoryId, categoryName); 
@@ -82,19 +81,16 @@ function ExpenseCardGenerator(props) {
     }
 
     let [expensesByCat, categoriesNames] = expensesByCategory(expenses, categories);
-  
-    return <>
-
+    
     {/* 
       TODO: 
-      1. DELETE request when clicking trashcan (deletes category and expenses) 
-      2. make it so there are a fixed num of cards visible (6), but with a 'View more' button to expand
-      3. make each card a button (maybe use global state) so that when
-        one is closed, the graph and history relate only to that categroy
+      - [x] DELETE request when clicking trashcan (deletes category and expenses) 
+      - [ ] make it so there are a fixed num of cards visible (6), but with a 'View more' button to expand
+      - [ ] make each card a button (maybe use global state) so that when one is closed, the graph and history relate only to that categroy
     */}
-    
-    {categoriesNames.map((category, index) => {
 
+    return <>    
+    {categoriesNames.map((category, index) => {
       return <React.Fragment key={index}>
       <div 
         onClick={handleCardClick} 

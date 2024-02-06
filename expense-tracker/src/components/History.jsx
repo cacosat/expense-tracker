@@ -10,10 +10,9 @@ import infoTooltip from '../assets/info.svg'
 export default function History(props) {
     // hooks
     // useState to keep track of expenses
-    let [useExpenses, setExpenses] = useState([]); // useExpenses is an array of expenses object
-
-    // useEffect to fetch expenses
+    const [expenses, setExpenses] = useState([]); // expenses is an array of expenses object
     useEffect(() => {
+      // useEffect to fetch expenses
       async function fetchExpenses() {
         try {
           const response = await fetch('http://localhost:4000/api/expenses');
@@ -26,7 +25,30 @@ export default function History(props) {
       fetchExpenses();
     }, []);
 
-  
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+      async function fetchCategories() {
+        try {
+          const response = await fetch('http://localhost:4000/api/categories');
+          const categoriesData = await response.json();
+          setCategories(categoriesData);
+        } catch (e) {
+          console.error({'error fetching categories from History component': e})
+        }
+      }
+      fetchCategories();
+    }, []);
+    
+    // --------------
+    // Functions
+    // --------------
+
+    function retrieveCategoryName(expense, categories) {
+      const expenseCategory = categories.filter((category) => category.id === expense.category_id); // returns array with 1 obj
+      return expenseCategory[0].name;
+    }
+
+
     return <>
     <div className={`flex flex-col gap-8 mb-8 xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px]`}>
       <div className='flex justify-between text-2xl text-start'>
@@ -74,14 +96,14 @@ export default function History(props) {
               </tr>
             </thead>
             <tbody>
-              {useExpenses.map((expense, index) => (
+              {expenses.map((expense, index) => (
                 <tr 
                   key={expense.id} 
-                  className={`text-left ${index === useExpenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700 hover:bg-stone-950`}
+                  className={`text-left ${index === expenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700 hover:bg-stone-950`}
                 >
                   <td className="p-2 min-w-[100px]">{expense.expense_date}</td>
                   <td className="p-2 ">{expense.amount}</td>
-                  <td className="p-2 ">{expense.category_name}</td>
+                  <td className="p-2 ">{retrieveCategoryName(expense, categories)}</td>
                   <td className="p-2 hidden md:table-cell w-[250px]">{expense.description}</td>
                 </tr>
               ))}
