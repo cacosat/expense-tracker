@@ -12,6 +12,12 @@ import AddCategoryModal from './components/AddCategoryModal'
 
 function App() {
   // hooks
+  const [expandExpenseCards, setExpandExpenseCards] = useState(true);
+  const toggleExpandExpenseCards = () => setExpandExpenseCards(prevState => !prevState); // prevState is arbitrary name for the "pending"/previous state accesible by the useState hook.
+  const expenseCardsLimit = 5;
+
+  const [numOfExpenseCards, setNumOfExpenseCards] = useState(0);
+
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
   const openExpenseModal = () => setIsExpenseModalOpen(true);
   const closeExpenseModal = () => setIsExpenseModalOpen(false);
@@ -20,12 +26,12 @@ function App() {
   const openCategoryModal = () => setIsExpenseCategroyOpen(true);
   const closeCategoryModal = () => setIsExpenseCategroyOpen(false);
 
-  // for every change of isExpenseModalOpen || isCategoryModalOpen,
-  // the scroll behavior updates to true or false accordingly. All
-  // this handled through a useEffect (use component lifecycle) with 
-  // dependencies of the modals so it triggers only on their change
-
+  
   useEffect(() => {
+    // for every change of isExpenseModalOpen || isCategoryModalOpen,
+    // the scroll behavior updates to true or false accordingly. All
+    // this handled through a useEffect (use component lifecycle) with 
+    // dependencies of the modals so it triggers only on their change
     if (isExpenseModalOpen || isCategoryModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -37,11 +43,22 @@ function App() {
   <div id='test' className={`flex flex-col items-center ${isCategoryModalOpen || isExpenseModalOpen ? ' blur-sm' : ''}`}>
     <div className={`flex flex-col items-center gap-12 `}>
       <Header iconLocation="./assets/plus-circle.svg" onClick={openExpenseModal} />
-      <div className='flex justify-center'>
+      <div className='flex flex-col justify-center gap-2'>
         <div className={`grid grid-cols-2 md:grid-cols-3 gap-4 mx-2 md:mx-16 `}>
-          <ExpenseCardGenerator />
+          <ExpenseCardGenerator
+            expandExpenseCards = {expandExpenseCards}
+            expenseCardsLimit = {expenseCardsLimit}
+            numOfExpenseCards = {numOfExpenseCards}
+            setNumOfExpenseCards = {setNumOfExpenseCards}
+          />
           <AddCategoryCard onClick={openCategoryModal} />
         </div>
+        <button 
+          className=' underline text-stone-600 self-end mx-2 md:mx-16 '
+          onClick={toggleExpandExpenseCards}
+        >
+          {numOfExpenseCards > expenseCardsLimit ? (expandExpenseCards ? 'Ver más' : 'Cerrar') : ''}
+        </button>
       </div>
 
       <div className='flex justify-center'>

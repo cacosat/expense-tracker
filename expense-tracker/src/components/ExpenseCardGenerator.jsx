@@ -64,7 +64,7 @@ function ExpenseCardGenerator(props) {
       if (!response.ok) {
         throw new Error(`Error in delete req: ${response.statusText}`)
       } else {
-        alert(`Eliminado correctamente: Categoría ${name} (id: ${id})`);
+        // alert(`Eliminado correctamente: Categoría ${name} (id: ${id})`);
       }
     } catch (e) {
       console.error({'error on deleteCategory DEL request': e})
@@ -77,6 +77,7 @@ function ExpenseCardGenerator(props) {
 
   function handleDelClick(categoryName, categories, e) {
     e.stopPropagation(); // stops click from going up (bubbling up) the DOM tree
+    window.location.reload();
     
     let category = categories.find((category) => categoryName === category.name); // finds corresponding category by name
     if (category != undefined) {
@@ -86,6 +87,11 @@ function ExpenseCardGenerator(props) {
   }
 
   let [expensesByCat, categoriesNames] = expensesByCategory(expenses, categories);
+
+  useEffect(() => {
+    props.setNumOfExpenseCards(categoriesNames.length);
+  }, [categories.length])
+
   {/* 
     TODO: 
     - [x] DELETE request when clicking trashcan (deletes category and expenses) 
@@ -101,7 +107,7 @@ function ExpenseCardGenerator(props) {
     <div 
       onClick={handleCardClick} 
       id={category} 
-      className="active:invert flex flex-col justify-between gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950"
+      className={`active:invert ${index + 1 > props.expenseCardsLimit ? (props.expandExpenseCards ? 'hidden' : 'flex flex-col') : ''} justify-between gap-2 lg:max-w-[240px] p-8 max-sm:p-4 border-2 rounded-2xl border-stone-700 hover:bg-stone-950`}
     >
       {/* Contenedor card */}
       <div className="flex justify-between  xs:text-lg text-sm font-bold ">
