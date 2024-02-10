@@ -8,7 +8,10 @@ import DoubleNext from "../assets/chevron-double-up.svg"
 import infoTooltip from '../assets/info.svg'
 
 export default function History(props) {
+    // -------------------------
     // hooks
+    // -------------------------
+
     // useState to keep track of expenses
     const [expenses, setExpenses] = useState([]); // expenses is an array of expenses object
     useEffect(() => {
@@ -24,7 +27,7 @@ export default function History(props) {
       }
       fetchExpenses();
     }, []);
-
+    
     const [categories, setCategories] = useState([]);
     useEffect(() => {
       async function fetchCategories() {
@@ -39,6 +42,33 @@ export default function History(props) {
       fetchCategories();
     }, []);
     
+    // Pagination
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+
+    const totalPages = Math.ceil(expenses.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const lastIndex = (currentPage * itemsPerPage) - 1;
+    const expensesToDisplay = expenses.slice(startIndex, lastIndex + 1); // slice doesn't include the last index [)
+
+    const goToFirstPage = () => {
+      setCurrentPage(1);
+    };
+    const goToPrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+    const goToNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+    const goToLastPage = () => {
+      setCurrentPage(totalPages);
+    };
+
     // --------------
     // Functions
     // --------------
@@ -47,7 +77,6 @@ export default function History(props) {
       const expenseCategory = categories.filter((category) => category.id === expense.category_id); // returns array with 1 obj
       return expenseCategory[0].name;
     }
-
 
     return <>
     <div className={`flex flex-col gap-8 mb-8 xxs:w-[90vw] xs:w-[60vw] sm:w-[70vw] lg:w-[752px]`}>
@@ -96,10 +125,10 @@ export default function History(props) {
               </tr>
             </thead>
             <tbody>
-              {expenses.map((expense, index) => (
+              { expensesToDisplay.map((expense, index) => (
                 <tr 
                   key={expense.id} 
-                  className={`text-left ${index === expenses.length-1 ? '' : 'border-b-[1px]'} border-stone-700 hover:bg-stone-950`}
+                  className={`text-left ${index ===   expensesToDisplay.length-1 ? '' : 'border-b-[1px]'} border-stone-700 hover:bg-stone-950`}
                 >
                   <td className="p-2 min-w-[100px]">{expense.expense_date}</td>
                   <td className="p-2 ">{expense.amount}</td>
@@ -111,19 +140,19 @@ export default function History(props) {
           </table>
         </section>
         <div className="flex gap-8 justify-end items-center">
-          <p>1 de 10</p>
+          <p>{currentPage} de 10</p>
           <div className="flex gap-4">
             {/* buttons */}
-            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
+            <button onClick={goToFirstPage} className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={DoublePrev} alt="nav button previous" />
             </button>
-            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
+            <button onClick={goToPrevPage} className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={Prev} alt="nav button previous" />
             </button>
-            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
+            <button onClick={goToNextPage} className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={Next} alt="nav button next" />
             </button>
-            <button className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
+            <button onClick={goToLastPage} className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">
               <img src={DoubleNext} alt="nav button next" />
             </button>
           </div>
