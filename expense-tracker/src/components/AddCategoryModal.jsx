@@ -19,6 +19,20 @@ export default function AddCategoryModal(props) {
         fetchCategories();
     }, [])
 
+    useEffect(() => {
+        // puts event listener on window for 'Enter' key to submit
+        
+        const handleKeyDown = (e) => {
+            if (e.key === 'Enter') {
+                handleSubmit();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {window.removeEventListener('keydown', handleKeyDown)}
+    }, []);
+
     async function postPayload(data) {
         try {
             const response = await fetch('http://localhost:4000/api/categories', {
@@ -49,6 +63,8 @@ export default function AddCategoryModal(props) {
     if (!props.isOpen) {
         return null;
     }
+
+    
 
     return <>
         <div className={`fixed bg-black top-9 border-2 rounded-2xl border-stone-700 p-8 xxs:w-[80vw] xs:w-[50vw] sm:w-[60vw] lg:w-[722px] mx-auto left-0 right-0`}>

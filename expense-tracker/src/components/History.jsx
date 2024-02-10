@@ -140,7 +140,7 @@ export default function History(props) {
           </table>
         </section>
         <div className="flex gap-8 justify-end items-center">
-          <p>{currentPage} de 10</p>
+          <p>{currentPage} de {totalPages}</p>
           <div className="flex gap-4">
             {/* buttons */}
             <button onClick={goToFirstPage} className="active:invert p-2 border-2 border-stone-700 rounded-md hover:bg-stone-950">

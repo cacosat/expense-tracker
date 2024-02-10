@@ -52,6 +52,19 @@ export default function AddExpenseForm() {
         postDataToServer(data);
     }
 
+    useEffect(() => {
+        // puts event listener on window for 'Enter' key to submit
+        
+        const handleKeyDown = (e) => {
+            if (e.key === 'Enter') {
+                handleSubmit();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {window.removeEventListener('keydown', handleKeyDown)}
+    }, []);
 
     return <>
         <form action="" className="flex flex-col gap-8" onSubmit={handleSubmit}>

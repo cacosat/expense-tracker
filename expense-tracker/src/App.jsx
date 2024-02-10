@@ -39,6 +39,22 @@ function App() {
     }
   }, [isExpenseModalOpen, isCategoryModalOpen]);
 
+  useEffect(() => {
+    // puts event listener on window for 'ESC' key to close modals, when component mounts
+    // then it returns a cleanup function for the listener when component unmounts
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeCategoryModal();
+        closeExpenseModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {window.removeEventListener('keydown', handleKeyDown)}
+  }, []);
+
   return <>
   <div id='test' className={`flex flex-col items-center ${isCategoryModalOpen || isExpenseModalOpen ? ' blur-sm' : ''}`}>
     <div className={`flex flex-col items-center gap-12 `}>
