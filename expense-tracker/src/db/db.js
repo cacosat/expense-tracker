@@ -10,7 +10,6 @@ const db = new sqlite3.Database('./expense-tracker.db', (e) => {
             if (e) {
                 console.error({'error allowing foreign key constraints': e.message});
             } else {
-                console.log('DB connected and foreign keys contrains allowed')
                 createTables();
             }
         }); 
@@ -48,7 +47,6 @@ function createTables() {
             // error handling callback func
             return console.log(error.message);
         }
-        console.log("categories created succesfully");
     });
 
     db.run(createExpensesTable, (error) => {
@@ -56,7 +54,6 @@ function createTables() {
             // error handling callback func
             return console.error(error.message);
         }
-        console.log("expenses created succesfully");
     });
 };
 

@@ -124,8 +124,6 @@ router.delete('/categories/:id', (req, res) => {
     const id = req.params.id;
     const query = "DELETE FROM categories WHERE id = ?";
     
-    console.log("Requested ID:", req.params.id);
-    console.log("Requested URL:", req.originalUrl);
     db.run(query, id, function (error) {
         if (error) {
             res.status(500).json({error: error.message})
