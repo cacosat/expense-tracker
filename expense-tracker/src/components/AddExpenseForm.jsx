@@ -7,7 +7,7 @@ export default function AddExpenseForm() {
     useEffect(() => {
         async function fetchCategories() {
             try {
-                const response = await fetch('http://localhost:4000/api/categories');
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
                 const categories = await response.json();
                 setCategories(categories);
             } catch (error) {
@@ -17,10 +17,11 @@ export default function AddExpenseForm() {
         fetchCategories();
     }, []);
 
+    console.log(import.meta.env.VITE_API_URL)
     async function postDataToServer(data) {
         // fetch for POST request
         try {
-            const response = await fetch('http://localhost:4000/api/expenses', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
                 method: "POST", 
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(data)

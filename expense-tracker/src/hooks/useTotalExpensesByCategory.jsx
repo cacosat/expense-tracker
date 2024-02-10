@@ -12,7 +12,7 @@ export default function useTotalExpensesByCategory() {
         // categories
         async function fetchCategories() {
         try {
-            const response = await fetch('http://localhost:4000/api/categories');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
             const dataCategories = await response.json();
             setCategories(dataCategories);
         } catch (e) {
@@ -24,7 +24,7 @@ export default function useTotalExpensesByCategory() {
         // expenses
         async function fetchExpenses() {
         try {
-            const response = await fetch('http://localhost:4000/api/expenses');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`);
             const expensesData = await response.json();
             setExpenses(expensesData);
         } catch (e) {

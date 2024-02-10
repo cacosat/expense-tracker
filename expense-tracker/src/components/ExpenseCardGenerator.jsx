@@ -14,7 +14,7 @@ function ExpenseCardGenerator(props) {
   useEffect(() => {
     // useEffect let's you handle connection from component to external system
     async function fetchCategories() {
-      const response = await fetch('http://localhost:4000/api/categories');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
       const categoriesData = await response.json();
       setCategories(categoriesData);
     }
@@ -27,7 +27,7 @@ function ExpenseCardGenerator(props) {
   useEffect(() => { 
     async function fetchExpenses() {
       try {
-        const response = await fetch('http://localhost:4000/api/expenses');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`);
         const expenses = await response.json();
         setExpenses(expenses);
       } catch (error) {
@@ -58,7 +58,7 @@ function ExpenseCardGenerator(props) {
 
   async function deleteCategory(id, name) {
     try {
-      const response = await fetch(`http://localhost:4000/api/categories/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/categories/${id}`, {
         method: 'DELETE', 
       });
       if (!response.ok) {

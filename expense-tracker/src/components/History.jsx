@@ -18,7 +18,7 @@ export default function History(props) {
       // useEffect to fetch expenses
       async function fetchExpenses() {
         try {
-          const response = await fetch('http://localhost:4000/api/expenses');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`);
           const expenses = await response.json();
           setExpenses(expenses);
         } catch (error) {
@@ -32,7 +32,7 @@ export default function History(props) {
     useEffect(() => {
       async function fetchCategories() {
         try {
-          const response = await fetch('http://localhost:4000/api/categories');
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
           const categoriesData = await response.json();
           setCategories(categoriesData);
         } catch (e) {

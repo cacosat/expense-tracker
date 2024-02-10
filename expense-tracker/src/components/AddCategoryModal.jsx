@@ -9,7 +9,7 @@ export default function AddCategoryModal(props) {
     useEffect(() => {
         async function fetchCategories() {
           try {
-            const response = await fetch('http://localhost:4000/api/categories');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
             const dataCategories = await response.json();
             setCategories(dataCategories);
           } catch(error) {
@@ -35,7 +35,7 @@ export default function AddCategoryModal(props) {
 
     async function postPayload(data) {
         try {
-            const response = await fetch('http://localhost:4000/api/categories', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`, {
                 method: 'POST',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify(data) // make it into JSON str

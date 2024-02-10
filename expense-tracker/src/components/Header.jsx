@@ -9,7 +9,7 @@ export default function Header(props) {
     useEffect(() => {
         async function fetchTotal() {
             try {
-                const response = await fetch('http://localhost:4000/api/expenses/total');
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses/total`);
                 const total = await response.json();
                 setTotal(total);
             } catch (error) {
